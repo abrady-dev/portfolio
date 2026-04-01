@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aden — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f9f8f5;
+      --surface: #ffffff;
+      --ink: #1a1a1a;
+      --ink-muted: #6b6b6b;
+      --ink-faint: #b0afa9;
+      --accent: #2c5f8a;
+      --accent-light: #e8f0f8;
+      --border: #e5e3de;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+      --radius: 10px;
+      --max: 860px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(249,248,245,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── SECTIONS ── */
+    section {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+    h2 {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 2rem;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 80px;
+    }
+    .hero-greeting {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 1rem;
+    }
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 400;
+      line-height: 1.05;
+      color: var(--ink);
+      margin-bottom: 1.4rem;
+    }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--ink-muted);
+      max-width: 520px;
+      line-height: 1.65;
+      margin-bottom: 2.5rem;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.65rem 1.4rem;
+      border-radius: 6px;
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { background: #1e4a70; }
+    .btn-outline {
+      background: transparent;
+      color: var(--ink);
+      border: 1.5px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--ink-muted); }
+    .hero-scroll {
+      margin-top: 4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      color: var(--ink-faint);
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+    }
+    .scroll-line {
+      width: 36px;
+      height: 1px;
+      background: var(--ink-faint);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .divider hr {
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .about-body {
+      color: var(--ink-muted);
+      font-size: 0.97rem;
+      line-height: 1.75;
+    }
+    .about-body p + p { margin-top: 1rem; }
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.2rem;
+    }
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 1.9rem;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .skill-group {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.3rem 1.4rem;
+    }
+    .skill-group-title {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .tag {
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.2rem 0.55rem;
+    }
+    .cert-row {
+      margin-top: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .cert-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: var(--accent-light);
+      color: var(--accent);
+      border: 1px solid #c2d8ed;
+      border-radius: 20px;
+      padding: 0.35rem 0.9rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.6rem 1.8rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: start;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .project-card:hover {
+      border-color: #c5d8e8;
+      box-shadow: 0 4px 20px rgba(44,95,138,0.07);
+    }
+    .project-type {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 0.4rem;
+    }
+    .project-name {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    .project-desc {
+      font-size: 0.88rem;
+      color: var(--ink-muted);
+      line-height: 1.65;
+      margin-bottom: 0.9rem;
+    }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .project-arrow {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-muted);
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+    .project-card:hover .project-arrow {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ── EXPERIENCE ── */
+    .exp-list { display: flex; flex-direction: column; gap: 1.8rem; }
+    .exp-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 1.5rem;
+      padding-bottom: 1.8rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .exp-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .exp-date {
+      font-size: 0.78rem;
+      color: var(--ink-faint);
+      padding-top: 0.2rem;
+      line-height: 1.5;
+    }
+    .exp-role {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 0.15rem;
+    }
+    .exp-company {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+    .exp-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .exp-bullets li {
+      font-size: 0.87rem;
+      color: var(--ink-muted);
+      padding-left: 1rem;
+      position: relative;
+    }
+    .exp-bullets li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--ink-faint);
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      text-align: center;
+    }
+    #contact h2 { margin-bottom: 0.6rem; }
+    .contact-sub {
+      color: var(--ink-muted);
+      font-size: 0.97rem;
+      margin-bottom: 2rem;
+    }
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.4rem;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .contact-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .contact-link svg { flex-shrink: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--ink-faint);
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.3rem; }
+      .nav-links { display: none; }
+      .hero-name { font-size: 2.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">Aden</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <p class="hero-greeting fade-up">Hello, I'm</p>
+  <h1 class="hero-name fade-up">Aden</h1>
+  <p class="hero-sub fade-up">
+    Information Technology student at UCF with hands-on experience in infrastructure, virtualization, and systems administration. I build things that work — in the data center and at home.
+  </p>
+  <div class="hero-actions fade-up">
+    <a href="#projects" class="btn btn-primary">View Projects</a>
+    <a href="resume.pdf" class="btn btn-outline" download>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Resume
+    </a>
+  </div>
+  <div class="hero-scroll fade-up">
+    <span class="scroll-line"></span>
+    Scroll to explore
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label fade-up">About Me</p>
+  <h2 class="fade-up">Infrastructure by day,<br>homelab by night.</h2>
+  <div class="about-grid">
+    <div class="about-body fade-up">
+      <p>
+        I'm a senior IT student at the University of Central Florida, graduating April 2025, with a focus on infrastructure, systems engineering, and virtualization. Currently interning at UCF IT on the Infrastructure & Virtualization team, where I work with vSphere, Windows Server, Active Directory, and enterprise backup systems daily.
+      </p>
+      <p>
+        Outside of work, I run a personal homelab where I experiment with self-hosted services, NAS configuration, and network administration — because the best way to learn is to break things and fix them yourself.
+      </p>
+    </div>
+    <div class="about-stats fade-up">
+      <div class="stat-card">
+        <div class="stat-num">4+</div>
+        <div class="stat-label">Years building homelabs</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">UCF</div>
+        <div class="stat-label">B.S. Information Technology</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">vSphere</div>
+        <div class="stat-label">Primary virtualization platform</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">A+</div>
+        <div class="stat-label">CompTIA (in progress)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label fade-up">Skills & Certifications</p>
+  <h2 class="fade-up">What I work with</h2>
+  <div class="skills-grid fade-up">
+    <div class="skill-group">
+      <div class="skill-group-title">Virtualization</div>
+      <div class="skill-tags">
+        <span class="tag">VMware vSphere</span>
+        <span class="tag">vSAN</span>
+        <span class="tag">ESXi</span>
+        <span class="tag">VM Lifecycle</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Systems</div>
+      <div class="skill-tags">
+        <span class="tag">Windows Server</span>
+        <span class="tag">Ubuntu Server</span>
+        <span class="tag">Active Directory</span>
+        <span class="tag">Group Policy</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Storage & Backup</div>
+      <div class="skill-tags">
+        <span class="tag">TrueNAS SCALE</span>
+        <span class="tag">Commvault Cloud</span>
+        <span class="tag">RAID</span>
+        <span class="tag">ZFS</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Networking</div>
+      <div class="skill-tags">
+        <span class="tag">TCP/IP</span>
+        <span class="tag">DNS/DHCP</span>
+        <span class="tag">VLANs</span>
+        <span class="tag">Tailscale</span>
+        <span class="tag">Eero Mesh</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Monitoring & Self-Hosted</div>
+      <div class="skill-tags">
+        <span class="tag">Uptime Kuma</span>
+        <span class="tag">Netdata</span>
+        <span class="tag">Nextcloud</span>
+        <span class="tag">Ollama</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Development</div>
+      <div class="skill-tags">
+        <span class="tag">MERN Stack</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">Java</span>
+        <span class="tag">MongoDB</span>
+        <span class="tag">Node.js</span>
+      </div>
+    </div>
+  </div>
+  <div class="cert-row fade-up">
+    <span style="font-size:0.8rem;color:var(--ink-muted);">Certifications:</span>
+    <span class="cert-badge">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+      CompTIA A+ — In Progress
+    </span>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label fade-up">Projects</p>
+  <h2 class="fade-up">Things I've built</h2>
+  <div class="projects-list">
+
+    <div class="project-card fade-up">
+      <div>
+        <div class="project-type">Homelab · NAS / Storage</div>
+        <div class="project-name">BananiServer — TrueNAS SCALE NAS</div>
+        <p class="project-desc">
+          Designed and deployed a personal NAS running TrueNAS SCALE with 4×4TB Seagate IronWolf drives in a RAID-Z2 configuration for single-drive fault tolerance. Integrated Tailscale for secure remote access, Uptime Kuma for service monitoring, and Netdata for real-time performance metrics. Configured SMB shares, managed datasets, and handled a full physical server room migration including subnet conflict resolution between an ISP router and Eero mesh network.
+        </p>
+        <div class="project-tags">
+          <span class="tag">TrueNAS SCALE</span><span class="tag">ZFS</span><span class="tag">Tailscale</span><span class="tag">Uptime Kuma</span><span class="tag">Netdata</span><span class="tag">Networking</span>
+        </div>
+      </div>
+      <div class="project-arrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </div>
+    </div>
+
+    <div class="project-card fade-up">
+      <div>
+        <div class="project-type">Homelab · Self-Hosted Cloud</div>
+        <div class="project-name">Mac Mini Ubuntu — Nextcloud Server</div>
+        <p class="project-desc">
+          Repurposed a Mac Mini as a headless Ubuntu Server running Nextcloud for private cloud storage. Configured SMB network shares, managed user accounts, and set up remote access via Tailscale. Resolved post-migration connectivity issues including subnet mismatches between the ISP gateway and Eero mesh system, and documented the full setup for reproducibility.
+        </p>
+        <div class="project-tags">
+          <span class="tag">Ubuntu Server</span><span class="tag">Nextcloud</span><span class="tag">SMB</span><span class="tag">Tailscale</span><span class="tag">Networking</span>
+        </div>
+      </div>
+      <div class="project-arrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </div>
+    </div>
+
+    <div class="project-card fade-up">
+      <div>
+        <div class="project-type">Full-Stack Web · MERN</div>
+        <div class="project-name">Game Tracker — MERN Stack Web App</div>
+        <p class="project-desc">
+          Built a full-stack game tracking web application for a university term project, inspired by MyAnimeList. Users can catalog, rate, and track games across a personalized library. Developed with MongoDB, Express, React, and Node.js. Handled environment setup on Apple Silicon, MongoDB configuration, and database seeding from scratch with custom seed scripts.
+        </p>
+        <div class="project-tags">
+          <span class="tag">MongoDB</span><span class="tag">Express</span><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">JavaScript</span>
+        </div>
+      </div>
+      <div class="project-arrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </div>
+    </div>
+
+    <div class="project-card fade-up">
+      <div>
+        <div class="project-type">Internship · Enterprise IT</div>
+        <div class="project-name">UCF IT — Infrastructure & Virtualization</div>
+        <p class="project-desc">
+          Working within a VMware vSphere environment spanning a vSAN datacenter, QA cluster, and four production servers. Responsibilities include VM provisioning and lifecycle management, Windows Server and Ubuntu administration, Active Directory and Group Policy configuration, Commvault Cloud backup migration support, and technical documentation. Gained hands-on enterprise experience across storage, compute, and identity management systems.
+        </p>
+        <div class="project-tags">
+          <span class="tag">vSphere</span><span class="tag">vSAN</span><span class="tag">Active Directory</span><span class="tag">Commvault</span><span class="tag">Windows Server</span><span class="tag">Documentation</span>
+        </div>
+      </div>
+      <div class="project-arrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label fade-up">Experience</p>
+  <h2 class="fade-up">Where I've worked</h2>
+  <div class="exp-list">
+    <div class="exp-item fade-up">
+      <div class="exp-date">2023 — Present<br>Oviedo, FL</div>
+      <div>
+        <div class="exp-role">Infrastructure & Virtualization Intern</div>
+        <div class="exp-company">UCF Information Technology</div>
+        <ul class="exp-bullets">
+          <li>Managed VM provisioning and lifecycle in a VMware vSphere environment with vSAN datacenter and QA cluster</li>
+          <li>Administered Windows Server and Ubuntu systems including patching, configuration, and user management</li>
+          <li>Configured Active Directory OUs, Group Policy Objects, and user/group permissions</li>
+          <li>Supported Commvault Cloud migration, writing documentation and assisting with data validation</li>
+          <li>Deployed and maintained TrueNAS SCALE for test storage workloads; assisted in physical server room relocation</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item fade-up">
+      <div class="exp-date">Expected Apr 2025</div>
+      <div>
+        <div class="exp-role">B.S. Information Technology</div>
+        <div class="exp-company">University of Central Florida — College of Engineering and Computer Science</div>
+        <ul class="exp-bullets">
+          <li>Relevant coursework: Computer Architecture, Databases, Web Development, Computer Networks</li>
+          <li>Completed a full-stack MERN web application as a term project in Web Application Development</li>
+          <li>Presented research on IT applications in space exploration (cybersecurity, QKD, satellite systems)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label fade-up">Contact</p>
+  <h2 class="fade-up">Let's connect</h2>
+  <p class="contact-sub fade-up">Open to full-time roles in systems engineering, infrastructure, or IT operations.</p>
+  <div class="contact-links fade-up">
+    <a href="mailto:your.email@example.com" class="contact-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      Email
+    </a>
+    <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      LinkedIn
+    </a>
+    <a href="https://github.com/yourusername" target="_blank" class="contact-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65S8.93 17.38 9 18v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+      GitHub
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2025 Aden · Built with HTML & CSS</span>
+</footer>
+
+<script>
+  // Fade-up on scroll
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach((el, i) => {
+    el.style.transitionDelay = `${(i % 4) * 0.07}s`;
+    obs.observe(el);
+  });
+</script>
+</body>
+</html>
