@@ -121,8 +121,8 @@ h2 {
 }
 .hero-photo img {
   width: 200px;
-  height: 200px;
-  border-radius: 50%;
+  height: 260px;
+  border-radius: var(--radius);
   object-fit: cover;
   object-position: center top;
   border: 2px solid var(--border);
@@ -307,5 +307,5 @@ footer { border-top: 1px solid var(--border); padding: 1.5rem 2rem; text-align: 
   .nav-links { display: none; }
   .hero-name { font-size: 2.8rem; }
   .hero-layout { flex-direction: column-reverse; align-items: flex-start; gap: 2rem; }
-  .hero-photo img { width: 140px; height: 140px; }
+  .hero-photo img { width: 130px; height: 170px; }
 }
