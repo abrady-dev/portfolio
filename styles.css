@@ -106,6 +106,28 @@ h2 {
   justify-content: center;
   padding-top: 80px;
 }
+.hero-layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+}
+.hero-text {
+  flex: 1;
+  min-width: 0;
+}
+.hero-photo {
+  flex-shrink: 0;
+}
+.hero-photo img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  border: 2px solid var(--border);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+}
 .hero-greeting {
   font-size: 0.8rem;
   font-weight: 500;
@@ -284,4 +306,6 @@ footer { border-top: 1px solid var(--border); padding: 1.5rem 2rem; text-align: 
   .exp-item { grid-template-columns: 1fr; gap: 0.3rem; }
   .nav-links { display: none; }
   .hero-name { font-size: 2.8rem; }
+  .hero-layout { flex-direction: column-reverse; align-items: flex-start; gap: 2rem; }
+  .hero-photo img { width: 140px; height: 140px; }
 }
