@@ -110,6 +110,7 @@ function resize() {
 }
 
 let lastFrameTs = null
+let rafId = null
 
 function frame(ts) {
     if (lastFrameTs === null) lastFrameTs = ts
@@ -149,16 +150,19 @@ function frame(ts) {
         ctx.fill()
     }
 
-    requestAnimationFrame(frame)
+    rafId = requestAnimationFrame(frame)
 }
 
 document.addEventListener('visibilitychange', () => {
     if (!document.hidden) {
         lastFrameTs = null
         lastSpawn = performance.now()
+        if (!rafId) rafId = requestAnimationFrame(frame)
+    } else {
+        if (rafId) { cancelAnimationFrame(rafId); rafId = null }
     }
 })
 
 window.addEventListener('resize', resize)
 resize()
-requestAnimationFrame(frame)
+rafId = requestAnimationFrame(frame)
