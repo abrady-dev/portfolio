@@ -28,7 +28,7 @@ class Pulse {
     }
 
     done() { return this.pos > this.end }
-    tick() { this.pos += this.speed }
+    tick(dt = 1) { this.pos += this.speed * dt }
 
     draw(ctx) {
         const head = this.pos
@@ -109,7 +109,13 @@ function resize() {
     buildGrid(w, h)
 }
 
+let lastFrameTs = null
+
 function frame(ts) {
+    if (lastFrameTs === null) lastFrameTs = ts
+    const dt = Math.min(ts - lastFrameTs, 50) / 16.67
+    lastFrameTs = ts
+
     const { width: w, height: h } = canvas
     ctx.clearRect(0, 0, w, h)
 
@@ -123,13 +129,13 @@ function frame(ts) {
 
     for (let i = pulses.length - 1; i >= 0; i--) {
         pulses[i].draw(ctx)
-        pulses[i].tick()
+        pulses[i].tick(dt)
         if (pulses[i].done()) pulses.splice(i, 1)
     }
 
     for (const b of blobs) {
-        b.cx += b.vx
-        b.cy += b.vy
+        b.cx += b.vx * dt
+        b.cy += b.vy * dt
         const pad = b.r * 0.5
         if (b.cx < -pad || b.cx > w + pad) b.vx *= -1
         if (b.cy < -pad || b.cy > h + pad) b.vy *= -1
@@ -145,6 +151,13 @@ function frame(ts) {
 
     requestAnimationFrame(frame)
 }
+
+document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+        lastFrameTs = null
+        lastSpawn = performance.now()
+    }
+})
 
 window.addEventListener('resize', resize)
 resize()
