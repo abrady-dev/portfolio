@@ -53,6 +53,16 @@
     <span class="scroll-line"></span>
     Scroll to explore
   </div>
+  <div class="discord-card fade-up" id="discord-card">
+    <div class="discord-avatar-wrap">
+      <img class="discord-avatar" id="discord-avatar" alt="Discord avatar" />
+      <span class="discord-dot" id="discord-dot" data-status="offline"></span>
+    </div>
+    <div class="discord-info">
+      <span class="discord-name" id="discord-name">Aden Brady</span>
+      <span class="discord-status-label" id="discord-status-label">Offline on Discord</span>
+    </div>
+  </div>
 </section>
 
 <div class="divider"><hr></div>
@@ -343,6 +353,26 @@
     el.style.transitionDelay = `${(i % 4) * 0.07}s`;
     obs.observe(el);
   });
+
+  // Discord presence via Lanyard
+  (async () => {
+    try {
+      const res = await fetch('https://api.lanyard.rest/v1/users/288413771855298560');
+      const { data } = await res.json();
+      const dot = document.getElementById('discord-dot');
+      const label = document.getElementById('discord-status-label');
+      const nameEl = document.getElementById('discord-name');
+      const avatar = document.getElementById('discord-avatar');
+      const u = data.discord_user;
+      dot.dataset.status = data.discord_status;
+      const labels = { online: 'Online', idle: 'Idle', dnd: 'Do Not Disturb', offline: 'Offline' };
+      label.textContent = (labels[data.discord_status] || 'Offline') + ' on Discord';
+      nameEl.textContent = u.global_name || u.username;
+      avatar.src = u.avatar
+        ? `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.png?size=128`
+        : `https://cdn.discordapp.com/embed/avatars/0.png`;
+    } catch (_) {}
+  })();
 </script>
 </body>
 </html>
