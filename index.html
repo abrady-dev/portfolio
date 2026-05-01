@@ -61,6 +61,10 @@
     <div class="discord-info">
       <span class="discord-name" id="discord-name">Aden Brady</span>
       <span class="discord-status-label" id="discord-status-label">Offline on Discord</span>
+      <span class="discord-activity" id="discord-activity">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="6" width="20" height="12" rx="6"/><path d="M6 12h4m-2-2v4"/><circle cx="17" cy="11" r="1"/><circle cx="15" cy="13" r="1"/></svg>
+        <span id="discord-activity-text"></span>
+      </span>
     </div>
   </div>
 </section>
@@ -371,6 +375,14 @@
       avatar.src = u.avatar
         ? `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.png?size=128`
         : `https://cdn.discordapp.com/embed/avatars/0.png`;
+
+      const game = (data.activities || []).find(a => a.type === 0);
+      if (game) {
+        const actEl = document.getElementById('discord-activity');
+        const actText = document.getElementById('discord-activity-text');
+        actText.textContent = game.details ? `${game.name} — ${game.details}` : game.name;
+        actEl.style.display = 'flex';
+      }
     } catch (_) {}
   })();
 </script>
