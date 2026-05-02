@@ -181,7 +181,7 @@ h2 {
 }
 .scroll-line { width: 36px; height: 1px; background: var(--ink-faint); }
 .discord-card {
-  margin: 2.5rem auto 0;
+  margin: 8rem auto 0;
   width: fit-content;
   display: flex;
   align-items: center;
@@ -222,6 +222,12 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
+}
+.bonfire-gif {
+  display: block;
+  width: clamp(140px, 18vw, 220px);
+  height: auto;
+  margin: 1.5rem auto 0;
 }
 .discord-name {
   font-size: 1.05rem;
