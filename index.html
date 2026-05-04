@@ -46,7 +46,7 @@
       </div>
     </div>
     <div class="hero-photo fade-up">
-      <img src="4U1A1609.jpeg" alt="Aden Brady" />
+      <img src="images/4U1A1609.jpeg" alt="Aden Brady" />
     </div>
   </div>
   <div class="hero-scroll fade-up">
@@ -67,7 +67,7 @@
       </span>
     </div>
   </div>
-  <img class="bonfire-gif fade-up" src="bonfire.gif" alt="Animated bonfire" />
+  <img class="bonfire-gif fade-up" src="images/bonfire.gif" alt="Animated bonfire" />
 </section>
 
 <div class="divider"><hr></div>
@@ -148,15 +148,15 @@
     <span style="font-size:1.5rem;color:var(--ink-muted);flex-shrink:0;">Certifications:</span>
     <div class="cert-badges">
       <span class="cert-badge">
-        <img src="msexpert.png" alt="Microsoft Office Certified" style="height:100px;width:auto;vertical-align:middle;">
+        <img src="images/msexpert.png" alt="Microsoft Office Certified" style="height:100px;width:auto;vertical-align:middle;">
         Microsoft Office Certified
       </span>
       <span class="cert-badge">
-        <img src="TestOut-IT-Fundamentals-Pro-1.png" alt="TestOut IT Fundamentals Pro" style="height:100px;width:auto;vertical-align:middle;">
+        <img src="images/TestOut-IT-Fundamentals-Pro-1.png" alt="TestOut IT Fundamentals Pro" style="height:100px;width:auto;vertical-align:middle;">
         TestOut IT Fundamentals Pro
       </span>
       <span class="cert-badge">
-        <img src="awscloudsec.png" alt="AWS Cloud Security Foundations" style="height:100px;width:auto;vertical-align:middle;">
+        <img src="images/awscloudsec.png" alt="AWS Cloud Security Foundations" style="height:100px;width:auto;vertical-align:middle;">
         AWS Cloud Security Foundations
       </span>
     </div>
@@ -174,8 +174,8 @@
       <div>
         <div class="project-type">Homelab · NAS / Storage</div>
         <div class="project-name">TrueNAS Home Server</div>
-        <p class="project-desc">Designed and built a home server running TrueNAS CE with RAID-Z1 for redundant storage across multiple drives. 
-          Deployed and managed self-hosted services via Docker containers including VaultWarden for password management with user authentication and access controls. 
+        <p class="project-desc">Designed and built a home server running TrueNAS CE with RAID-Z1 for redundant storage across multiple drives.
+          Deployed and managed self-hosted services via Docker containers including VaultWarden for password management with user authentication and access controls.
           Configured secure remote access using Tailscale VPN, enabling encrypted connectivity to all home services without exposing ports to the public internet. Check out my GitHub for more details!(Click the Arrow)</p>
         <div class="project-tags">
           <span class="tag">TrueNAS</span><span class="tag">ZFS / RAID-Z1</span><span class="tag">Docker</span><span class="tag">VaultWarden</span><span class="tag">Tailscale</span>
@@ -348,64 +348,6 @@
 </footer>
 
 <script src="bg-animation.js"></script>
-<script>
-  // Theme toggle
-  const root = document.documentElement;
-  const btn = document.getElementById('themeToggle');
-  const stored = localStorage.getItem('theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-  if (stored === 'dark' || (!stored && prefersDark)) {
-    root.setAttribute('data-theme', 'dark');
-  }
-
-  btn.addEventListener('click', () => {
-    const isDark = root.getAttribute('data-theme') === 'dark';
-    root.setAttribute('data-theme', isDark ? 'light' : 'dark');
-    localStorage.setItem('theme', isDark ? 'light' : 'dark');
-  });
-
-  // Scroll animations
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.12 });
-
-  document.querySelectorAll('.fade-up').forEach((el, i) => {
-    el.style.transitionDelay = `${(i % 4) * 0.07}s`;
-    obs.observe(el);
-  });
-
-  // Discord presence via Lanyard
-  (async () => {
-    try {
-      const res = await fetch('https://api.lanyard.rest/v1/users/288413771855298560');
-      const { data } = await res.json();
-      const dot = document.getElementById('discord-dot');
-      const label = document.getElementById('discord-status-label');
-      const nameEl = document.getElementById('discord-name');
-      const avatar = document.getElementById('discord-avatar');
-      const u = data.discord_user;
-      dot.dataset.status = data.discord_status;
-      const labels = { online: 'Online', idle: 'Idle', dnd: 'Do Not Disturb', offline: 'Offline' };
-      label.textContent = (labels[data.discord_status] || 'Offline') + ' on Discord';
-      nameEl.textContent = u.global_name || u.username;
-      avatar.src = u.avatar
-        ? `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.png?size=128`
-        : `https://cdn.discordapp.com/embed/avatars/0.png`;
-
-      const game = (data.activities || []).find(a => a.type === 0);
-      if (game) {
-        const actEl = document.getElementById('discord-activity');
-        const actText = document.getElementById('discord-activity-text');
-        actText.textContent = game.details ? `${game.name} — ${game.details}` : game.name;
-        actEl.style.display = 'flex';
-      }
-    } catch (_) {}
-  })();
-</script>
+<script src="main.js"></script>
 </body>
 </html>

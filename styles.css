@@ -1,16 +1,16 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #f9f8f5;
-  --surface: #ffffff;
+  --bg: #e8e5df;
+  --surface: #f0ede7;
   --ink: #1a1a1a;
   --ink-muted: #6b6b6b;
   --ink-faint: #b0afa9;
   --accent: #2c5f8a;
-  --accent-light: #e8f0f8;
+  --accent-light: #dce8f4;
   --accent-border: #c2d8ed;
-  --border: #e5e3de;
-  --nav-bg: rgba(249,248,245,0.92);
+  --border: #d2cfc8;
+  --nav-bg: rgba(232,229,223,0.92);
   --serif: 'Playfair Display', Georgia, serif;
   --sans: 'DM Sans', system-ui, sans-serif;
   --radius: 10px;
