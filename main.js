@@ -26,6 +26,43 @@ document.querySelectorAll('.fade-up').forEach((el, i) => {
   obs.observe(el);
 });
 
+// Photo carousel with auto-advance and manual controls
+(function () {
+  const carousel = document.getElementById('photo-carousel');
+  if (!carousel) {
+    return;
+  }
+  const slides = carousel.querySelectorAll('.photo-slide');
+  const dots = carousel.querySelectorAll('.photo-dot');
+  const prev = carousel.querySelector('.photo-arrow--prev');
+  const next = carousel.querySelector('.photo-arrow--next');
+  let current = 0;
+  let timer;
+
+  function goTo(index) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = (index + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+
+  function startAuto() {
+    timer = setInterval(() => goTo(current + 1), 5000);
+  }
+
+  function resetAuto() {
+    clearInterval(timer);
+    startAuto();
+  }
+
+  prev.addEventListener('click', () => { goTo(current - 1); resetAuto(); });
+  next.addEventListener('click', () => { goTo(current + 1); resetAuto(); });
+  dots.forEach((dot, i) => dot.addEventListener('click', () => { goTo(i); resetAuto(); }));
+
+  startAuto();
+})();
+
 (async () => {
   try {
     const res = await fetch('https://api.lanyard.rest/v1/users/288413771855298560');

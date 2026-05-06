@@ -46,7 +46,20 @@
       </div>
     </div>
     <div class="hero-photo fade-up">
-      <img src="images/4U1A1609.jpeg" alt="Aden Brady" />
+      <div class="photo-carousel" id="photo-carousel">
+        <img src="images/4U1A1609.jpeg" alt="Aden Brady" class="photo-slide active" />
+        <img src="images/4U1A1701.jpeg" alt="Aden Brady" class="photo-slide" />
+        <button class="photo-arrow photo-arrow--prev" aria-label="Previous photo">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="photo-arrow photo-arrow--next" aria-label="Next photo">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <div class="photo-dots">
+          <span class="photo-dot active"></span>
+          <span class="photo-dot"></span>
+        </div>
+      </div>
     </div>
   </div>
   <div class="hero-scroll fade-up">
