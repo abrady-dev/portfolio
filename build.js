@@ -2,13 +2,14 @@ const fs = require('fs');
 const path = require('path');
 
 const sections = [
-  'nav',
+  'layout-open',
   'hero',
   'about',
   'skills',
   'projects',
   'experience',
   'contact',
+  'layout-close',
 ];
 
 const body = sections
@@ -21,8 +22,13 @@ const html = `<!DOCTYPE html>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Adens Archive — Portfolio</title>
+  <link rel="icon" type="image/x-icon" href="favicon_io/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png" />
+  <link rel="manifest" href="favicon_io/site.webmanifest" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -30,10 +36,6 @@ const html = `<!DOCTYPE html>
 <canvas id="bg-canvas"></canvas>
 
 ${body}
-
-<footer>
-  <span>© 2026 Aden Brady · Built with HTML & CSS</span>
-</footer>
 
 <script src="bg-animation.js"></script>
 <script src="main.js"></script>

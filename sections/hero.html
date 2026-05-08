@@ -1,55 +1,120 @@
-<section id="hero">
-  <div class="hero-layout">
-    <div class="hero-text">
-      <p class="hero-greeting fade-up">Hello, I'm</p>
-      <h1 class="hero-name fade-up">Aden Brady</h1>
-      <p class="hero-sub fade-up">
-        Information Technology graduate of UCF with hands-on experience in infrastructure, virtualization, and systems administration. I build things that work in the data center and at home.
-      </p>
-      <div class="hero-actions fade-up">
-        <a href="#projects" class="btn btn-primary">View Projects</a>
-        <a href="resume.pdf" class="btn btn-outline" download>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Resume
-        </a>
+    <!-- HERO PANEL -->
+    <div class="op2-hero" id="hero">
+      <div class="op2-hero-left">
+        <div class="op2-prompt"><b>aden@archive</b>:~$ whoami<span class="cur">&#x2590;</span></div>
+        <h1 class="op2-h1">Aden Brady</h1>
+        <p class="op2-deck">
+          Infrastructure professional with hands-on experience in <b>virtualization, systems administration, and enterprise IT</b>. Currently supporting the City of Orlando, with prior work on UCF's infrastructure and virtualization team.
+        </p>
+        <div class="op2-cta">
+          <a href="#projects" class="op2-btn">View Projects</a>
+          <a href="resume.pdf" target="_blank" class="op2-btn alt"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Resume</a>
+        </div>
       </div>
-    </div>
-    <div class="hero-photo fade-up">
-      <div class="photo-carousel" id="photo-carousel">
-        <img src="images/4U1A1609.jpeg" alt="Aden Brady" class="photo-slide active" />
-        <img src="images/4U1A1701.jpeg" alt="Aden Brady" class="photo-slide" />
-        <button class="photo-arrow photo-arrow--prev" aria-label="Previous photo">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <button class="photo-arrow photo-arrow--next" aria-label="Next photo">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-        <div class="photo-dots">
-          <span class="photo-dot active"></span>
-          <span class="photo-dot"></span>
+      <div class="op2-portrait">
+        <div class="photo-carousel op2-carousel" id="photo-carousel">
+          <img src="images/4U1A1609.jpeg" alt="Aden Brady" class="photo-slide active" />
+          <img src="images/4U1A1701.jpeg" alt="Aden Brady" class="photo-slide" />
+          <button class="photo-arrow photo-arrow--prev" aria-label="Previous photo">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="photo-arrow photo-arrow--next" aria-label="Next photo">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+        <div class="op2-portrait-cap">
+          <span>aden.brady</span>
+          
         </div>
       </div>
     </div>
-  </div>
-  <div class="hero-scroll fade-up">
-    <span class="scroll-line"></span>
-    Scroll to explore
-  </div>
-  <div class="discord-card fade-up" id="discord-card">
-    <div class="discord-avatar-wrap">
-      <img class="discord-avatar" id="discord-avatar" alt="Discord avatar" />
-      <span class="discord-dot" id="discord-dot" data-status="offline"></span>
-    </div>
-    <div class="discord-info">
-      <span class="discord-name" id="discord-name">Aden Brady</span>
-      <span class="discord-status-label" id="discord-status-label">Offline on Discord</span>
-      <span class="discord-activity" id="discord-activity">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="6" width="20" height="12" rx="6"/><path d="M6 12h4m-2-2v4"/><circle cx="17" cy="11" r="1"/><circle cx="15" cy="13" r="1"/></svg>
-        <span id="discord-activity-text"></span>
-      </span>
-    </div>
-  </div>
-  <img class="bonfire-gif fade-up" src="images/bonfire.gif" alt="Animated bonfire" />
-</section>
 
-<div class="divider"><hr></div>
+    <!-- STATS ROW -->
+    <div class="op2-stats">
+      <div class="op2-stat">
+        <div class="op2-stat-l">Status</div>
+        <div class="op2-stat-v">online<span class="u"> / available</span></div>
+      </div>
+      <div class="op2-stat">
+        <div class="op2-stat-l">Role</div>
+        <div class="op2-stat-v">Sys. Support<span class="u"> / Orlando</span></div>
+      </div>
+      <div class="op2-stat">
+        <div class="op2-stat-l">Education</div>
+        <div class="op2-stat-v">UCF<span class="u"> / B.S. Information Technology '26</span></div>
+      </div>
+      <div class="op2-stat">
+        <div class="op2-stat-l">Cyber competition</div>
+        <div class="op2-stat-v">Top 5<span class="u"> / Horse Plinko</span></div>
+      </div>
+    </div>
+
+    <!-- HOMELAB PANEL -->
+    <div class="op2-panel">
+      <div class="op2-panel-h">
+        <h2 class="op2-panel-title">Homelab</h2>
+        <div class="meta">6 active · 1 decom · source: <b>uptime-kuma</b></div>
+      </div>
+      <div class="op2-services">
+        <div class="op2-svc"><span class="op2-svc-dot"></span><span class="op2-svc-name">pihole</span><span class="op2-svc-host">docker</span></div>
+        <div class="op2-svc"><span class="op2-svc-dot"></span><span class="op2-svc-name">portainer</span><span class="op2-svc-host">docker</span></div>
+        <div class="op2-svc"><span class="op2-svc-dot"></span><span class="op2-svc-name">speedtest-tracker</span><span class="op2-svc-host">docker</span></div>
+        <div class="op2-svc"><span class="op2-svc-dot"></span><span class="op2-svc-name">tailscale</span><span class="op2-svc-host">docker</span></div>
+        <div class="op2-svc"><span class="op2-svc-dot"></span><span class="op2-svc-name">uptime-kuma</span><span class="op2-svc-host">docker</span></div>
+        <div class="op2-svc"><span class="op2-svc-dot"></span><span class="op2-svc-name">vaultwarden</span><span class="op2-svc-host">docker</span></div>
+        <div class="op2-svc op2-svc--decom"><span class="op2-svc-dot decom"></span><span class="op2-svc-name">vsphere-lab</span><span class="op2-svc-host">ucf-it / access ended</span></div>
+      </div>
+    </div>
+
+    <!-- PROJECTS QUICK-LIST -->
+    <div class="op2-panel">
+      <div class="op2-panel-h">
+        <h2 class="op2-panel-title">Projects</h2>
+        <div class="meta">5 entries · sorted: recent</div>
+      </div>
+      <div class="op2-projects">
+        <a class="op2-prj" href="https://github.com/abrady-dev/NAS-Build-2025" target="_blank" rel="noopener noreferrer">
+          <div class="op2-prj-id">p01</div>
+          <div class="op2-prj-name">TrueNAS Home Server</div>
+          <div class="op2-prj-scope">homelab/storage</div>
+          <div class="op2-prj-lang">yaml, sh, ssh</div>
+          <div class="op2-prj-yr">2025–</div>
+        </a>
+        <div class="op2-prj">
+          <div class="op2-prj-id">p02</div>
+          <div class="op2-prj-name">Pi-hole DNS Sinkhole</div>
+          <div class="op2-prj-scope">homelab/network</div>
+          <div class="op2-prj-lang">conf</div>
+          <div class="op2-prj-yr">2025–</div>
+        </div>
+        <a class="op2-prj" href="https://github.com/zaid-hasan-ucf/cis4004termproject" target="_blank" rel="noopener noreferrer">
+          <div class="op2-prj-id">p03</div>
+          <div class="op2-prj-name">Game Tracker (MERN Stack)</div>
+          <div class="op2-prj-scope">web/app</div>
+          <div class="op2-prj-lang">js</div>
+          <div class="op2-prj-yr">2026</div>
+        </a>
+        <div class="op2-prj">
+          <div class="op2-prj-id">p04</div>
+          <div class="op2-prj-name">ServiceNow VM Analytics</div>
+          <div class="op2-prj-scope">internship/automation</div>
+          <div class="op2-prj-lang">py</div>
+          <div class="op2-prj-yr">2026</div>
+        </div>
+        <div class="op2-prj">
+          <div class="op2-prj-id">p05</div>
+          <div class="op2-prj-name">UCF IT Infrastructure</div>
+          <div class="op2-prj-scope">internship/enterprise</div>
+          <div class="op2-prj-lang">—</div>
+          <div class="op2-prj-yr">2024–26</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TICKER -->
+    <div class="op2-ticker">
+      <span><b>vsphere</b> patched</span>
+      <span><b>truenas</b> snapshot ok</span>
+      <span><b>pihole</b> blocked</span>
+      <span><b>tailscale</b> 4 nodes online</span>
+    </div>

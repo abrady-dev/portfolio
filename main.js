@@ -1,3 +1,8 @@
+/**
+ * Runtime behaviour: theme toggle, scroll animations, photo carousel,
+ * live sidebar clock, and Discord presence via Lanyard WebSocket
+ */
+
 const root = document.documentElement;
 const btn = document.getElementById('themeToggle');
 const stored = localStorage.getItem('theme');
@@ -19,7 +24,7 @@ const obs = new IntersectionObserver((entries) => {
       e.target.classList.add('visible');
     }
   });
-}, { threshold: 0.12 });
+}, { threshold: 0.12, root: document.querySelector('.op2-main') });
 
 document.querySelectorAll('.fade-up').forEach((el, i) => {
   el.style.transitionDelay = `${(i % 4) * 0.07}s`;
@@ -41,10 +46,14 @@ document.querySelectorAll('.fade-up').forEach((el, i) => {
 
   function goTo(index) {
     slides[current].classList.remove('active');
-    dots[current].classList.remove('active');
+    if (dots[current]) {
+      dots[current].classList.remove('active');
+    }
     current = (index + slides.length) % slides.length;
     slides[current].classList.add('active');
-    dots[current].classList.add('active');
+    if (dots[current]) {
+      dots[current].classList.add('active');
+    }
   }
 
   function startAuto() {
@@ -63,13 +72,94 @@ document.querySelectorAll('.fade-up').forEach((el, i) => {
   startAuto();
 })();
 
+// Left sidebar collapse toggle
+(function () {
+  const grid = document.querySelector('.op2-grid');
+  const toggle = document.getElementById('op2-side-toggle');
+  if (!grid || !toggle) {
+    return;
+  }
+  let collapsed = false;
+
+  toggle.addEventListener('click', () => {
+    collapsed = !collapsed;
+    grid.classList.toggle('side-collapsed', collapsed);
+    toggle.setAttribute('aria-label', collapsed ? 'Expand left sidebar' : 'Collapse left sidebar');
+  });
+})();
+
+// Right rail collapse toggle
+(function () {
+  const grid = document.querySelector('.op2-grid');
+  const toggle = document.getElementById('op2-rail-toggle');
+  if (!grid || !toggle) {
+    return;
+  }
+  let collapsed = false;
+
+  toggle.addEventListener('click', () => {
+    collapsed = !collapsed;
+    grid.classList.toggle('rail-collapsed', collapsed);
+    toggle.setAttribute('aria-label', collapsed ? 'Expand right rail' : 'Collapse right rail');
+  });
+})();
+
+// Section tracker — keeps left sidebar nav in sync with scroll position
+(function () {
+  const ORDER = ['hero', 'about', 'skills', 'projects', 'experience', 'contact'];
+  const main = document.querySelector('.op2-main');
+
+  function setActive(id) {
+    document.querySelectorAll('.op2-side-item[href]').forEach(link => {
+      link.classList.toggle('on', link.getAttribute('href') === `#${id}`);
+    });
+  }
+
+  const sectionObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        setActive(e.target.id);
+      }
+    });
+  }, {
+    root: main,
+    threshold: 0.35,
+  });
+
+  ORDER.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      sectionObs.observe(el);
+    }
+  });
+})();
+
+/** Ticks the sidebar clock every 30 seconds */
+function updateClock() {
+  const el = document.getElementById('op2-clock');
+  if (!el) {
+    return;
+  }
+  const now = new Date();
+  const d = String(now.getDate()).padStart(2, '0');
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const m = months[now.getMonth()];
+  const y = String(now.getFullYear()).slice(2);
+  const h = String(now.getHours()).padStart(2, '0');
+  const min = String(now.getMinutes()).padStart(2, '0');
+  el.textContent = `${d} ${m} ${y} · ${h}:${min}`;
+}
+updateClock();
+setInterval(updateClock, 30000);
+
 /**
  * Connects to the Lanyard WebSocket and keeps the Discord presence card
  * updated in real time. Reconnects automatically on disconnect.
  */
 (() => {
   const USER_ID = '288413771855298560';
-  const labels = { online: 'Online', idle: 'Idle', dnd: 'Do Not Disturb', offline: 'Offline' };
+  const labels = { online: 'online', idle: 'idle', dnd: 'do not disturb', offline: 'offline' };
   let heartbeatTimer = null;
 
   // Update the DOM from a Lanyard presence data object
@@ -83,11 +173,13 @@ document.querySelectorAll('.fade-up').forEach((el, i) => {
     const u = data.discord_user;
 
     dot.dataset.status = data.discord_status;
-    label.textContent = (labels[data.discord_status] || 'Offline') + ' on Discord';
+    label.textContent = (labels[data.discord_status] || 'offline') + ' on Discord';
     nameEl.textContent = u.global_name || u.username;
-    avatar.src = u.avatar
-      ? `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.png?size=128`
-      : `https://cdn.discordapp.com/embed/avatars/0.png`;
+
+    if (u.avatar) {
+      avatar.src = `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.png?size=128`;
+      avatar.style.display = 'block';
+    }
 
     const game = (data.activities || []).find(a => a.type === 0);
     if (game) {

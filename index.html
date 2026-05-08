@@ -4,361 +4,539 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Adens Archive — Portfolio</title>
+  <link rel="icon" type="image/x-icon" href="favicon_io/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png" />
+  <link rel="manifest" href="favicon_io/site.webmanifest" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <canvas id="bg-canvas"></canvas>
 
-<nav>
-  <a class="nav-logo" href="#hero">Adens Archive</a>
-  <div class="nav-right">
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-      <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      <svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-    </button>
-  </div>
-</nav>
+<div class="op2-grid">
 
-<section id="hero">
-  <div class="hero-layout">
-    <div class="hero-text">
-      <p class="hero-greeting fade-up">Hello, I'm</p>
-      <h1 class="hero-name fade-up">Aden Brady</h1>
-      <p class="hero-sub fade-up">
-        Information Technology graduate of UCF with hands-on experience in infrastructure, virtualization, and systems administration. I build things that work in the data center and at home.
-      </p>
-      <div class="hero-actions fade-up">
-        <a href="#projects" class="btn btn-primary">View Projects</a>
-        <a href="resume.pdf" class="btn btn-outline" download>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Resume
+  <!-- SIDEBAR (column 1) -->
+  <aside class="op2-side">
+
+    <div class="op2-side-body">
+      <div class="op2-side-brand">
+        <div class="name">Adens Archive</div>
+        <div class="by">aden brady · GT3</div>
+      </div>
+
+      <div class="op2-side-section">
+        <div class="op2-side-h">Navigate</div>
+        <a class="op2-side-item on" href="#hero"><span class="key">01</span><span>overview</span></a>
+        <a class="op2-side-item" href="#about"><span class="key">02</span><span>about</span></a>
+        <a class="op2-side-item" href="#skills"><span class="key">03</span><span>skills</span></a>
+        <a class="op2-side-item" href="#projects"><span class="key">04</span><span>projects</span></a>
+        <a class="op2-side-item" href="#experience"><span class="key">05</span><span>experience</span></a>
+        <a class="op2-side-item" href="#contact"><span class="key">06</span><span>contact</span></a>
+      </div>
+
+      <div class="op2-side-section">
+        <div class="op2-side-h">Homelab</div>
+        <div class="op2-side-item"><span class="key">→</span><span>nas01.lab</span></div>
+        <div class="op2-side-item"><span class="key">→</span><span>rpi.lab</span></div>
+        <div class="op2-side-item"><span class="key">→</span><span>esxi.ucf</span></div>
+        <div class="op2-side-item"><span class="key">→</span><span>docker host</span></div>
+      </div>
+
+      <div class="op2-side-section">
+        <div class="op2-side-h">Shortcuts</div>
+        <div class="op2-side-item"><span class="key">⌘K</span><span>command palette</span></div>
+        <a class="op2-side-item" href="resume.pdf" target="_blank"><span class="key">⌘R</span><span>resume.pdf</span></a>
+      </div>
+
+      <!-- Pinned status strip -->
+      <div class="op2-side-status">
+        <div class="row">
+          <span class="lbl">net</span>
+          <span class="ts-pill">tailscale</span>
+        </div>
+        <div class="row">
+          <span class="lbl">local</span>
+          <span class="op2-clock" id="op2-clock">--</span>
+        </div>
+        <div class="row" style="margin-top: 6px; border-top: 1px solid var(--line); padding-top: 8px;">
+          <span class="lbl">theme</span>
+          <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+            <svg class="icon-moon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <svg class="icon-sun" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </button>
+        </div>
+      </div>
+    </div><!-- /.op2-side-body -->
+
+    <button class="op2-side-toggle" id="op2-side-toggle" aria-label="Collapse left sidebar">
+      <svg class="op2-side-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+    </button>
+
+  </aside>
+
+  <!-- MAIN COLUMN (column 2) — closed in layout-close.html -->
+  <main class="op2-main">
+
+    <!-- HERO PANEL -->
+    <div class="op2-hero" id="hero">
+      <div class="op2-hero-left">
+        <div class="op2-prompt"><b>aden@archive</b>:~$ whoami<span class="cur">&#x2590;</span></div>
+        <h1 class="op2-h1">Aden Brady</h1>
+        <p class="op2-deck">
+          Infrastructure professional with hands-on experience in <b>virtualization, systems administration, and enterprise IT</b>. Currently supporting the City of Orlando, with prior work on UCF's infrastructure and virtualization team.
+        </p>
+        <div class="op2-cta">
+          <a href="#projects" class="op2-btn">View Projects</a>
+          <a href="resume.pdf" target="_blank" class="op2-btn alt"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Resume</a>
+        </div>
+      </div>
+      <div class="op2-portrait">
+        <div class="photo-carousel op2-carousel" id="photo-carousel">
+          <img src="images/4U1A1609.jpeg" alt="Aden Brady" class="photo-slide active" />
+          <img src="images/4U1A1701.jpeg" alt="Aden Brady" class="photo-slide" />
+          <button class="photo-arrow photo-arrow--prev" aria-label="Previous photo">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="photo-arrow photo-arrow--next" aria-label="Next photo">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+        <div class="op2-portrait-cap">
+          <span>aden.brady</span>
+          
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS ROW -->
+    <div class="op2-stats">
+      <div class="op2-stat">
+        <div class="op2-stat-l">Status</div>
+        <div class="op2-stat-v">online<span class="u"> / available</span></div>
+      </div>
+      <div class="op2-stat">
+        <div class="op2-stat-l">Role</div>
+        <div class="op2-stat-v">Sys. Support<span class="u"> / Orlando</span></div>
+      </div>
+      <div class="op2-stat">
+        <div class="op2-stat-l">Education</div>
+        <div class="op2-stat-v">UCF<span class="u"> / B.S. Information Technology '26</span></div>
+      </div>
+      <div class="op2-stat">
+        <div class="op2-stat-l">Cyber competition</div>
+        <div class="op2-stat-v">Top 5<span class="u"> / Horse Plinko</span></div>
+      </div>
+    </div>
+
+    <!-- HOMELAB PANEL -->
+    <div class="op2-panel">
+      <div class="op2-panel-h">
+        <h2 class="op2-panel-title">Homelab</h2>
+        <div class="meta">6 active · 1 decom · source: <b>uptime-kuma</b></div>
+      </div>
+      <div class="op2-services">
+        <div class="op2-svc"><span class="op2-svc-dot"></span><span class="op2-svc-name">pihole</span><span class="op2-svc-host">docker</span></div>
+        <div class="op2-svc"><span class="op2-svc-dot"></span><span class="op2-svc-name">portainer</span><span class="op2-svc-host">docker</span></div>
+        <div class="op2-svc"><span class="op2-svc-dot"></span><span class="op2-svc-name">speedtest-tracker</span><span class="op2-svc-host">docker</span></div>
+        <div class="op2-svc"><span class="op2-svc-dot"></span><span class="op2-svc-name">tailscale</span><span class="op2-svc-host">docker</span></div>
+        <div class="op2-svc"><span class="op2-svc-dot"></span><span class="op2-svc-name">uptime-kuma</span><span class="op2-svc-host">docker</span></div>
+        <div class="op2-svc"><span class="op2-svc-dot"></span><span class="op2-svc-name">vaultwarden</span><span class="op2-svc-host">docker</span></div>
+        <div class="op2-svc op2-svc--decom"><span class="op2-svc-dot decom"></span><span class="op2-svc-name">vsphere-lab</span><span class="op2-svc-host">ucf-it / access ended</span></div>
+      </div>
+    </div>
+
+    <!-- PROJECTS QUICK-LIST -->
+    <div class="op2-panel">
+      <div class="op2-panel-h">
+        <h2 class="op2-panel-title">Projects</h2>
+        <div class="meta">5 entries · sorted: recent</div>
+      </div>
+      <div class="op2-projects">
+        <a class="op2-prj" href="https://github.com/abrady-dev/NAS-Build-2025" target="_blank" rel="noopener noreferrer">
+          <div class="op2-prj-id">p01</div>
+          <div class="op2-prj-name">TrueNAS Home Server</div>
+          <div class="op2-prj-scope">homelab/storage</div>
+          <div class="op2-prj-lang">yaml, sh, ssh</div>
+          <div class="op2-prj-yr">2025–</div>
+        </a>
+        <div class="op2-prj">
+          <div class="op2-prj-id">p02</div>
+          <div class="op2-prj-name">Pi-hole DNS Sinkhole</div>
+          <div class="op2-prj-scope">homelab/network</div>
+          <div class="op2-prj-lang">conf</div>
+          <div class="op2-prj-yr">2025–</div>
+        </div>
+        <a class="op2-prj" href="https://github.com/zaid-hasan-ucf/cis4004termproject" target="_blank" rel="noopener noreferrer">
+          <div class="op2-prj-id">p03</div>
+          <div class="op2-prj-name">Game Tracker (MERN Stack)</div>
+          <div class="op2-prj-scope">web/app</div>
+          <div class="op2-prj-lang">js</div>
+          <div class="op2-prj-yr">2026</div>
+        </a>
+        <div class="op2-prj">
+          <div class="op2-prj-id">p04</div>
+          <div class="op2-prj-name">ServiceNow VM Analytics</div>
+          <div class="op2-prj-scope">internship/automation</div>
+          <div class="op2-prj-lang">py</div>
+          <div class="op2-prj-yr">2026</div>
+        </div>
+        <div class="op2-prj">
+          <div class="op2-prj-id">p05</div>
+          <div class="op2-prj-name">UCF IT Infrastructure</div>
+          <div class="op2-prj-scope">internship/enterprise</div>
+          <div class="op2-prj-lang">—</div>
+          <div class="op2-prj-yr">2024–26</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TICKER -->
+    <div class="op2-ticker">
+      <span><b>vsphere</b> patched</span>
+      <span><b>truenas</b> snapshot ok</span>
+      <span><b>pihole</b> blocked</span>
+      <span><b>tailscale</b> 4 nodes online</span>
+    </div>
+
+    <div class="op2-panel" id="about">
+      <div class="op2-panel-h">
+        <h2 class="op2-panel-title">About</h2>
+        <div class="meta">infrastructure by day, homelab by night</div>
+      </div>
+      <div class="about-grid fade-up">
+        <div class="about-body">
+          <p>I've spent the past two years in enterprise infrastructure, first at UCF IT managing VMware environments and supporting Dell server hardware, now at the City of Orlando diagnosing and resolving system issues across the organization. The common thread is hands-on work with the technology that keeps everything running.</p>
+          <p>Outside of that I maintain a personal homelab to keep learning hands-on, compete in cyber defense with Hack@UCF, and earned the rank of Eagle Scout, an experience that shaped how I approach leadership and community.</p>
+        </div>
+        <div class="about-stats">
+          <div class="stat-card">
+            <div class="stat-num">UCF</div>
+            <div class="stat-label">B.S. Information Technology, May 2026</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">Top 5</div>
+            <div class="stat-label">Horse Plinko Cyber Defense Competition</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">Eagle</div>
+            <div class="stat-label">Boy Scouts of America</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">VMware</div>
+            <div class="stat-label">Primary virtualization platform</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="op2-panel" id="skills">
+      <div class="op2-panel-h">
+        <h2 class="op2-panel-title">Skills</h2>
+        <div class="meta">tools and platforms</div>
+      </div>
+      <div class="skills-grid fade-up">
+        <div class="skill-group">
+          <div class="skill-group-title">Virtualization</div>
+          <div class="skill-tags">
+            <span class="tag">VMware vSphere</span><span class="tag">ESXi</span><span class="tag">vSAN</span><span class="tag">VM Lifecycle</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Systems</div>
+          <div class="skill-tags">
+            <span class="tag">Windows Server</span><span class="tag">Ubuntu Server</span><span class="tag">Active Directory</span><span class="tag">Group Policy</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Storage and Self-Hosted</div>
+          <div class="skill-tags">
+            <span class="tag">TrueNAS</span><span class="tag">Docker</span><span class="tag">ZFS / RAID-Z</span><span class="tag">VaultWarden</span><span class="tag">Nextcloud</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Networking and Security</div>
+          <div class="skill-tags">
+            <span class="tag">TCP/IP</span><span class="tag">DNS / Pi-hole</span><span class="tag">Tailscale VPN</span><span class="tag">Firewall Rules</span><span class="tag">VLANs</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Tools and Platforms</div>
+          <div class="skill-tags">
+            <span class="tag">ServiceNow</span><span class="tag">Uptime Kuma</span><span class="tag">Netdata</span><span class="tag">Dell Hardware</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Development</div>
+          <div class="skill-tags">
+            <span class="tag">Java</span><span class="tag">Python</span><span class="tag">C</span><span class="tag">JavaScript</span><span class="tag">MERN Stack</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="op2-panel" id="projects">
+      <div class="op2-panel-h">
+        <h2 class="op2-panel-title">Project Details</h2>
+        <div class="meta">full write-ups</div>
+      </div>
+      <div class="projects-list">
+
+        <a class="project-card fade-up" href="https://github.com/abrady-dev/NAS-Build-2025" target="_blank" rel="noopener noreferrer">
+          <div>
+            <div class="project-type">Homelab · NAS / Storage</div>
+            <div class="project-name">TrueNAS Home Server</div>
+            <p class="project-desc">Designed and built a home server running TrueNAS CE with RAID-Z1 for redundant storage across multiple drives. Deployed and managed self-hosted services via Docker containers including VaultWarden for password management with user authentication and access controls. Configured secure remote access using Tailscale VPN, enabling encrypted connectivity to all home services without exposing ports to the public internet.</p>
+            <div class="project-tags">
+              <span class="tag">TrueNAS</span><span class="tag">ZFS / RAID-Z1</span><span class="tag">Docker</span><span class="tag">VaultWarden</span><span class="tag">Tailscale</span>
+            </div>
+          </div>
+          <div class="project-arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </div>
+        </a>
+
+        <div class="project-card fade-up">
+          <div>
+            <div class="project-type">Homelab · Network Security</div>
+            <div class="project-name">Network Security and DNS Filtering with Pi-hole</div>
+            <p class="project-desc">Deployed a Pi-hole DNS sinkhole across 12+ devices, reducing malicious and tracking domain requests by 35%. Configured custom blocklists and regularly analyzed DNS query logs to identify suspicious traffic patterns. Hardened DNS infrastructure by setting Pi-hole as the primary resolver, preventing DNS leaks and enforcing network-wide filtering across all connected devices.</p>
+            <div class="project-tags">
+              <span class="tag">Pi-hole</span><span class="tag">DNS</span><span class="tag">Network Security</span><span class="tag">Linux</span>
+            </div>
+          </div>
+          <div class="project-arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </div>
+        </div>
+
+        <a class="project-card fade-up" href="https://github.com/zaid-hasan-ucf/cis4004termproject" target="_blank" rel="noopener noreferrer">
+          <div>
+            <div class="project-type">Full-Stack Web · MERN</div>
+            <div class="project-name">Game Tracker - MERN Stack Web App</div>
+            <p class="project-desc">Built a full-stack game tracking web application for a university term project, inspired by MyAnimeList. Users can catalog, rate, and track games across a personalized library. Developed with MongoDB, Express, React, and Node.js, handling environment setup, database configuration, and seed scripting from scratch.</p>
+            <div class="project-tags">
+              <span class="tag">MongoDB</span><span class="tag">Express</span><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">JavaScript</span>
+            </div>
+          </div>
+          <div class="project-arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </div>
+        </a>
+
+        <div class="project-card fade-up">
+          <div>
+            <div class="project-type">Internship · Automation and Analytics</div>
+            <div class="project-name">UCF IT - ServiceNow VM Automation Analytics</div>
+            <p class="project-desc">Built an analytics pipeline to process over 3,200 closed VM Request Items (RITMs) from the ServiceNow API. Enriched raw RITM data with task-level details including location, duration, and assignee, then calculated key metrics including average task completion time, task counts, and type breakdowns grouped by hosting location. Outputs structured JSON and generates visual charts for the infrastructure team.</p>
+            <div class="project-tags">
+              <span class="tag">Python 3.12</span><span class="tag">ServiceNow REST API</span><span class="tag">OAuth</span><span class="tag">matplotlib</span><span class="tag">Ubuntu 24</span>
+            </div>
+          </div>
+          <div class="project-arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </div>
+        </div>
+
+        <div class="project-card fade-up">
+          <div>
+            <div class="project-type">Internship · Enterprise IT</div>
+            <div class="project-name">UCF IT - Infrastructure and Virtualization</div>
+            <p class="project-desc">Worked within a VMware vSphere environment managing VM provisioning, patching, and lifecycle tasks across dev/test infrastructure. Responsibilities include Windows Server and Linux administration, Active Directory and Group Policy configuration, Dell server hardware support, and incident tracking via ServiceNow. Maintained technical documentation and internal knowledge base articles.</p>
+            <div class="project-tags">
+              <span class="tag">vSphere</span><span class="tag">Active Directory</span><span class="tag">Windows Server</span><span class="tag">ServiceNow</span><span class="tag">Dell Hardware</span><span class="tag">Documentation</span>
+            </div>
+          </div>
+          <div class="project-arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="op2-panel" id="experience">
+      <div class="op2-panel-h">
+        <h2 class="op2-panel-title">Experience</h2>
+        <div class="meta">where I've been</div>
+      </div>
+      <div class="exp-list">
+
+        <div class="exp-item fade-up">
+          <div class="exp-date">June 2026 — Present<br>Orlando, FL</div>
+          <div>
+            <div class="exp-role">Computer Systems Support Analyst</div>
+            <div class="exp-company">City of Orlando</div>
+            <ul class="exp-bullets">
+              <li>Diagnose and resolve hardware and software issues on desktop, laptop, and mobile computer terminals (MCTs); coordinate with service providers for device replacement and re-initialization</li>
+              <li>Install and configure advanced enterprise applications including Client Access, Document Imaging, and Tidemark on end-user systems</li>
+              <li>Use Systems Management Server (SMS) for remote computer management, control, and problem determination</li>
+              <li>Support users with password resets, login issues, and general troubleshooting across City systems</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item fade-up">
+          <div class="exp-date">Jul 2024 — May 2026<br>Orlando, FL</div>
+          <div>
+            <div class="exp-role">Infrastructure and Virtualization Intern</div>
+            <div class="exp-company">University of Central Florida, UCF IT</div>
+            <ul class="exp-bullets">
+              <li>Managed and supported VMware dev/test infrastructure including patching, configuration changes, and VM lifecycle tasks</li>
+              <li>Developed and managed VMs for testing Active Directory, Windows Server, and Linux environments</li>
+              <li>Supported Dell server hardware including installs, upgrades, monitoring, troubleshooting, and break/fix activities</li>
+              <li>Tracked and resolved IT incidents and service requests using ServiceNow with timely documentation and escalation</li>
+              <li>Maintained system configuration documentation and created internal knowledge base articles</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item fade-up">
+          <div class="exp-date">2024 — May 2026<br>Orlando, FL</div>
+          <div>
+            <div class="exp-role">Member, Cyber Defense Competition</div>
+            <div class="exp-company">Hack@UCF</div>
+            <ul class="exp-bullets">
+              <li>Competed in the Horse Plinko Cyber Defense Competition, defending Windows and Linux systems against live red-team attacks, placed top 5</li>
+              <li>Performed system hardening: credential updates, removal of unauthorized users, service lockdown, and firewall rule implementation</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item fade-up">
+          <div class="exp-date">May 2023 — May 2026</div>
+          <div>
+            <div class="exp-role">B.S. Information Technology</div>
+            <div class="exp-company">University of Central Florida, College of Engineering and Computer Science</div>
+            <ul class="exp-bullets">
+              <li>EXCEL Scholar; coursework includes Network Security, Operating Systems, Database Management, Systems Administration, and Computer Architecture</li>
+              <li>Built a full-stack MERN web application as a term project in Web Application Development</li>
+              <li>Presented research on IT and cybersecurity applications in space exploration</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item fade-up">
+          <div class="exp-date">Feb 2014 — Feb 2020</div>
+          <div>
+            <div class="exp-role">Eagle Scout</div>
+            <div class="exp-company">Boy Scouts of America</div>
+            <ul class="exp-bullets">
+              <li>Earned the rank of Eagle Scout, the highest achievement in Scouting</li>
+              <li>Led a service project for a local greyhound adoption center; mentored junior scouts and led volunteer initiatives</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="op2-panel" id="contact">
+      <div class="op2-panel-h">
+        <h2 class="op2-panel-title">Contact</h2>
+        <div class="meta">let's connect</div>
+      </div>
+      <p class="contact-sub fade-up">Open to full-time roles in Systems Engineering, Infrastructure, or IT Operations.</p>
+      <div class="contact-links fade-up">
+        <a href="mailto:aden.brady@gmail.com" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          aden.brady@gmail.com
+        </a>
+        <a href="https://linkedin.com/in/aden-brady" target="_blank" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/abrady-dev" target="_blank" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65S8.93 17.38 9 18v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+          GitHub
         </a>
       </div>
     </div>
-    <div class="hero-photo fade-up">
-      <div class="photo-carousel" id="photo-carousel">
-        <img src="images/4U1A1609.jpeg" alt="Aden Brady" class="photo-slide active" />
-        <img src="images/4U1A1701.jpeg" alt="Aden Brady" class="photo-slide" />
-        <button class="photo-arrow photo-arrow--prev" aria-label="Previous photo">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <button class="photo-arrow photo-arrow--next" aria-label="Next photo">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-        <div class="photo-dots">
-          <span class="photo-dot active"></span>
-          <span class="photo-dot"></span>
+
+  </main><!-- /.op2-main -->
+
+  <!-- RIGHT RAIL (column 3) -->
+  <aside class="op2-aside">
+
+    <button class="op2-aside-toggle" id="op2-rail-toggle" aria-label="Collapse right rail">
+      <svg class="op2-aside-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+    </button>
+
+    <div class="op2-aside-body">
+
+    <!-- User status card -->
+    <div class="op2-card" id="discord-card">
+      <div class="op2-card-h">
+        <span>user.status</span>
+        <span class="live">live</span>
+      </div>
+      <div class="op2-card-b">
+        <div class="op2-status-rule"></div>
+        <div class="op2-discord-row">
+          <div class="op2-discord-av-wrap">
+            <img class="op2-discord-av" id="discord-avatar" alt="Discord avatar" />
+            <span class="op2-discord-dot" id="discord-dot" data-status="offline"></span>
+          </div>
+          <div>
+            <div class="op2-discord-name" id="discord-name">Aden Brady</div>
+            <div class="op2-discord-status" id="discord-status-label">offline on Discord</div>
+            <div class="op2-discord-activity" id="discord-activity" style="display:none;">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="6" width="20" height="12" rx="6"/><path d="M6 12h4m-2-2v4"/><circle cx="17" cy="11" r="1"/><circle cx="15" cy="13" r="1"/></svg>
+              <span id="discord-activity-text"></span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="hero-scroll fade-up">
-    <span class="scroll-line"></span>
-    Scroll to explore
-  </div>
-  <div class="discord-card fade-up" id="discord-card">
-    <div class="discord-avatar-wrap">
-      <img class="discord-avatar" id="discord-avatar" alt="Discord avatar" />
-      <span class="discord-dot" id="discord-dot" data-status="offline"></span>
-    </div>
-    <div class="discord-info">
-      <span class="discord-name" id="discord-name">Aden Brady</span>
-      <span class="discord-status-label" id="discord-status-label">Offline on Discord</span>
-      <span class="discord-activity" id="discord-activity">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="6" width="20" height="12" rx="6"/><path d="M6 12h4m-2-2v4"/><circle cx="17" cy="11" r="1"/><circle cx="15" cy="13" r="1"/></svg>
-        <span id="discord-activity-text"></span>
-      </span>
-    </div>
-  </div>
-  <img class="bonfire-gif fade-up" src="images/bonfire.gif" alt="Animated bonfire" />
-</section>
 
-<div class="divider"><hr></div>
+    <!-- Bonfire card -->
+    <div class="op2-card">
+      <div class="op2-card-h">
+        <span>./bonfire</span>
+        <span>idle</span>
+      </div>
+      <div class="op2-card-b op2-card-b--flush">
+        <img class="op2-bonfire" src="images/bonfire.gif" alt="" />
+      </div>
+    </div>
 
-<section id="about">
-  <p class="section-label fade-up">About Me</p>
-  <h2 class="fade-up">Infrastructure by day,<br>homelab by night.</h2>
-  <div class="about-grid">
-    <div class="about-body fade-up">
-      <p>I'm an IT professional and UCF graduate with a B.S. in Information Technology, focused on infrastructure, systems engineering, and virtualization. Currently working as a Computer Systems Support Analyst for the City of Orlando, supporting enterprise systems and end users across the organization.</p>
-      <p>Outside of work I run a personal homelab, compete in cyber defense competitions with Hack@UCF, and earned the rank of Eagle Scout — an experience that shaped how I approach leadership, problem-solving, and community.</p>
-    </div>
-    <div class="about-stats fade-up">
-      <div class="stat-card">
-        <div class="stat-num">UCF</div>
-        <div class="stat-label">B.S. Information Technology, May 2026</div>
+    <!-- Achievements card -->
+    <div class="op2-card">
+      <div class="op2-card-h">
+        <span>achievements</span>
+        <span class="op2-unlocked">3 unlocked</span>
       </div>
-      <div class="stat-card">
-        <div class="stat-num">Top 5</div>
-        <div class="stat-label">Horse Plinko Cyber Defense Competition</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">Eagle</div>
-        <div class="stat-label">Boy Scouts of America</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">VMware</div>
-        <div class="stat-label">Primary virtualization platform</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"><hr></div>
-
-<section id="skills">
-  <p class="section-label fade-up">Skills & Certifications</p>
-  <h2 class="fade-up">What I work with</h2>
-  <div class="skills-grid fade-up">
-    <div class="skill-group">
-      <div class="skill-group-title">Virtualization</div>
-      <div class="skill-tags">
-        <span class="tag">VMware vSphere</span><span class="tag">ESXi</span><span class="tag">vSAN</span><span class="tag">VM Lifecycle</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title">Systems</div>
-      <div class="skill-tags">
-        <span class="tag">Windows Server</span><span class="tag">Ubuntu Server</span><span class="tag">Active Directory</span><span class="tag">Group Policy</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title">Storage & Self-Hosted</div>
-      <div class="skill-tags">
-        <span class="tag">TrueNAS</span><span class="tag">Docker</span><span class="tag">ZFS / RAID-Z</span><span class="tag">VaultWarden</span><span class="tag">Nextcloud</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title">Networking & Security</div>
-      <div class="skill-tags">
-        <span class="tag">TCP/IP</span><span class="tag">DNS / Pi-hole</span><span class="tag">Tailscale VPN</span><span class="tag">Firewall Rules</span><span class="tag">VLANs</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title">Tools & Platforms</div>
-      <div class="skill-tags">
-        <span class="tag">ServiceNow</span><span class="tag">Uptime Kuma</span><span class="tag">Netdata</span><span class="tag">Dell Hardware</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title">Development</div>
-      <div class="skill-tags">
-        <span class="tag">Java</span><span class="tag">Python</span><span class="tag">C</span><span class="tag">JavaScript</span><span class="tag">MERN Stack</span>
-      </div>
-    </div>
-  </div>
-  <div class="cert-row fade-up">
-    <span style="font-size:1.5rem;color:var(--ink-muted);flex-shrink:0;">Certifications:</span>
-    <div class="cert-badges">
-      <span class="cert-badge">
-        <img src="images/msexpert.png" alt="Microsoft Office Certified" style="height:100px;width:auto;vertical-align:middle;">
-        Microsoft Office Certified
-      </span>
-      <span class="cert-badge">
-        <img src="images/TestOut-IT-Fundamentals-Pro-1.png" alt="TestOut IT Fundamentals Pro" style="height:100px;width:auto;vertical-align:middle;">
-        TestOut IT Fundamentals Pro
-      </span>
-      <span class="cert-badge">
-        <img src="images/awscloudsec.png" alt="AWS Cloud Security Foundations" style="height:100px;width:auto;vertical-align:middle;">
-        AWS Cloud Security Foundations
-      </span>
-    </div>
-  </div>
-</section>
-
-<div class="divider"><hr></div>
-
-<section id="projects">
-  <p class="section-label fade-up">Projects</p>
-  <h2 class="fade-up">Things I've built</h2>
-  <div class="projects-list">
-
-    <a class="project-card fade-up" href="https://github.com/abrady-dev/NAS-Build-2025" target="_blank" rel="noopener noreferrer">
-      <div>
-        <div class="project-type">Homelab · NAS / Storage</div>
-        <div class="project-name">TrueNAS Home Server</div>
-        <p class="project-desc">Designed and built a home server running TrueNAS CE with RAID-Z1 for redundant storage across multiple drives.
-          Deployed and managed self-hosted services via Docker containers including VaultWarden for password management with user authentication and access controls.
-          Configured secure remote access using Tailscale VPN, enabling encrypted connectivity to all home services without exposing ports to the public internet. Check out my GitHub for more details!(Click the Arrow)</p>
-        <div class="project-tags">
-          <span class="tag">TrueNAS</span><span class="tag">ZFS / RAID-Z1</span><span class="tag">Docker</span><span class="tag">VaultWarden</span><span class="tag">Tailscale</span>
+      <div class="op2-card-b">
+        <div class="op2-cert-row">
+          <span class="op2-cert-check">✓</span>
+          <img src="images/msexpert.png" alt="Microsoft Office Expert" />
+          <span>Microsoft Office Expert</span>
+        </div>
+        <div class="op2-cert-row">
+          <span class="op2-cert-check">✓</span>
+          <img src="images/TestOut-IT-Fundamentals-Pro-1.png" alt="TestOut IT Fundamentals Pro" />
+          <span>TestOut IT Fundamentals Pro</span>
+        </div>
+        <div class="op2-cert-row">
+          <span class="op2-cert-check">✓</span>
+          <img src="images/awscloudsec.png" alt="AWS Cloud Security Foundations" />
+          <span>AWS Cloud Security Foundations</span>
         </div>
       </div>
-      <div class="project-arrow">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-      </div>
-    </a>
-
-    <div class="project-card fade-up">
-      <div>
-        <div class="project-type">Homelab · Network Security</div>
-        <div class="project-name">Network Security & DNS Filtering — Pi-hole</div>
-        <p class="project-desc">Deployed a Pi-hole DNS sinkhole across 12+ devices, reducing malicious and tracking domain requests by 35%. Configured custom blocklists and regularly analyzed DNS query logs to identify suspicious traffic patterns. Hardened DNS infrastructure by setting Pi-hole as the primary resolver, preventing DNS leaks and enforcing network-wide filtering across all connected devices.</p>
-        <div class="project-tags">
-          <span class="tag">Pi-hole</span><span class="tag">DNS</span><span class="tag">Network Security</span><span class="tag">Linux</span>
-        </div>
-      </div>
-      <div class="project-arrow">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-      </div>
     </div>
 
-    <a class="project-card fade-up" href="https://github.com/zaid-hasan-ucf/cis4004termproject" target="_blank" rel="noopener noreferrer">
-      <div>
-        <div class="project-type">Full-Stack Web · MERN</div>
-        <div class="project-name">Game Tracker — MERN Stack Web App</div>
-        <p class="project-desc">Built a full-stack game tracking web application for a university term project, inspired by MyAnimeList. Users can catalog, rate, and track games across a personalized library. Developed with MongoDB, Express, React, and Node.js — handling environment setup, database configuration, and seed scripting from scratch.</p>
-        <div class="project-tags">
-          <span class="tag">MongoDB</span><span class="tag">Express</span><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">JavaScript</span>
-        </div>
-      </div>
-      <div class="project-arrow">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-      </div>
-    </a>
+    </div><!-- /.op2-aside-body -->
 
-    <div class="project-card fade-up">
-      <div>
-        <div class="project-type">Internship · Automation & Analytics</div>
-        <div class="project-name">UCF IT - ServiceNow VM Automation Analytics</div>
-        <p class="project-desc">Built an analytics pipeline to process over 3,200 closed VM Request Items (RITMs) from the ServiceNow API. Enriched raw RITM data with task-level details — location, duration, and assignee — then calculated key metrics including average task completion time (using business duration), task counts, and type breakdowns grouped by hosting location. Outputs structured JSON and generates visual charts for the infrastructure team.</p>
-        <div class="project-tags">
-          <span class="tag">Python 3.12</span><span class="tag">ServiceNow REST API</span><span class="tag">OAuth</span><span class="tag">matplotlib</span><span class="tag">Ubuntu 24</span>
-        </div>
-      </div>
-      <div class="project-arrow">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-      </div>
-    </div>
+  </aside><!-- /.op2-aside -->
 
-    <div class="project-card fade-up">
-      <div>
-        <div class="project-type">Internship · Enterprise IT</div>
-        <div class="project-name">UCF IT — Infrastructure & Virtualization</div>
-        <p class="project-desc">Working within a VMware vSphere environment managing VM provisioning, patching, and lifecycle tasks across dev/test infrastructure. Responsibilities include Windows Server and Linux administration, Active Directory and Group Policy configuration, Dell server hardware support, and incident tracking via ServiceNow. Maintains technical documentation and internal knowledge base articles.</p>
-        <div class="project-tags">
-          <span class="tag">vSphere</span><span class="tag">Active Directory</span><span class="tag">Windows Server</span><span class="tag">ServiceNow</span><span class="tag">Dell Hardware</span><span class="tag">Documentation</span>
-        </div>
-      </div>
-      <div class="project-arrow">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<div class="divider"><hr></div>
-
-<section id="experience">
-  <p class="section-label fade-up">Experience</p>
-  <h2 class="fade-up">Where I've been</h2>
-  <div class="exp-list">
-
-    <div class="exp-item fade-up">
-      <div class="exp-date">June 2026 — Present<br>Orlando, FL</div>
-      <div>
-        <div class="exp-role">Computer Systems Support Analyst</div>
-        <div class="exp-company">City of Orlando</div>
-        <ul class="exp-bullets">
-          <li>Diagnosed and resolved hardware and software issues on desktop, laptop, and mobile computer terminals (MCTs); coordinated with service providers for device replacement and re-initialization</li>
-          <li>Installed and configured advanced enterprise applications including Client Access, Document Imaging, and Tidemark on end-user systems</li>
-          <li>Used Systems Management Server (SMS) for remote computer management, control, and problem determination</li>
-          <li>Supported users with password resets, login issues, and general troubleshooting across City systems</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="exp-item fade-up">
-      <div class="exp-date">Jul 2024 — May 2026<br>Orlando, FL</div>
-      <div>
-        <div class="exp-role">Infrastructure & Virtualization Intern</div>
-        <div class="exp-company">University of Central Florida — UCF IT</div>
-        <ul class="exp-bullets">
-          <li>Managed and supported VMware dev/test infrastructure including patching, configuration changes, and VM lifecycle tasks</li>
-          <li>Developed and managed VMs for testing Active Directory, Windows Server, and Linux environments</li>
-          <li>Supported Dell server hardware including installs, upgrades, monitoring, troubleshooting, and break/fix activities</li>
-          <li>Tracked and resolved IT incidents and service requests using ServiceNow with timely documentation and escalation</li>
-          <li>Maintained system configuration documentation and created internal knowledge base articles</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="exp-item fade-up">
-      <div class="exp-date">2024 — May 2026<br>Orlando, FL</div>
-      <div>
-        <div class="exp-role">Member — Cyber Defense Competition</div>
-        <div class="exp-company">Hack@UCF</div>
-        <ul class="exp-bullets">
-          <li>Competed in the Horse Plinko Cyber Defense Competition, defending Windows and Linux systems against live red-team attacks — placed top 5</li>
-          <li>Performed system hardening: credential updates, removal of unauthorized users, service lockdown, and firewall rule implementation</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="exp-item fade-up">
-      <div class="exp-date">May 2023 — May 2026</div>
-      <div>
-        <div class="exp-role">B.S. Information Technology</div>
-        <div class="exp-company">University of Central Florida — College of Engineering and Computer Science</div>
-        <ul class="exp-bullets">
-          <li>EXCEL Scholar; coursework includes Network Security, Operating Systems, Database Management, Systems Administration, and Computer Architecture</li>
-          <li>Built a full-stack MERN web application as a term project in Web Application Development</li>
-          <li>Presented research on IT and cybersecurity applications in space exploration</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="exp-item fade-up">
-      <div class="exp-date">Feb 2014 — Feb 2020</div>
-      <div>
-        <div class="exp-role">Eagle Scout</div>
-        <div class="exp-company">Boy Scouts of America</div>
-        <ul class="exp-bullets">
-          <li>Earned the rank of Eagle Scout — the highest achievement in Scouting</li>
-          <li>Led a service project for a local greyhound adoption center; mentored junior scouts and led volunteer initiatives</li>
-        </ul>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<div class="divider"><hr></div>
-
-<section id="contact">
-  <p class="section-label fade-up">Contact</p>
-  <h2 class="fade-up">Let's connect</h2>
-  <p class="contact-sub fade-up">Open to full-time roles in Systems Engineering, Infrastructure, or IT Operations starting May 2026.</p>
-  <div class="contact-links fade-up">
-    <a href="mailto:aden.brady@gmail.com" class="contact-link">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-      aden.brady@gmail.com
-    </a>
-    <a href="https://linkedin.com/in/aden-brady" target="_blank" class="contact-link">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-      LinkedIn
-    </a>
-    <a href="https://github.com/abrady-dev" target="_blank" class="contact-link">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65S8.93 17.38 9 18v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-      GitHub
-    </a>
-  </div>
-</section>
-
-<footer>
-  <span>© 2026 Aden Brady · Built with HTML & CSS</span>
-</footer>
+</div><!-- /.op2-grid -->
 
 <script src="bg-animation.js"></script>
 <script src="main.js"></script>
