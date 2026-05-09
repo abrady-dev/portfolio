@@ -4,7 +4,6 @@
  */
 
 const root = document.documentElement;
-const btn = document.getElementById('themeToggle');
 const stored = localStorage.getItem('theme');
 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
@@ -12,19 +11,24 @@ if (stored === 'dark' || (!stored && prefersDark)) {
   root.setAttribute('data-theme', 'dark');
 }
 
-btn.addEventListener('click', () => {
-  const isDark = root.getAttribute('data-theme') === 'dark';
-  root.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  localStorage.setItem('theme', isDark ? 'light' : 'dark');
+// Wire all theme-toggle buttons (sidebar and mobile bar)
+document.querySelectorAll('.theme-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    root.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    localStorage.setItem('theme', isDark ? 'light' : 'dark');
+  });
 });
 
+// On mobile the page scrolls on the body; use viewport as the observer root
+const isMobile = () => window.innerWidth <= 768;
 const obs = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
       e.target.classList.add('visible');
     }
   });
-}, { threshold: 0.12, root: document.querySelector('.op2-main') });
+}, { threshold: 0.12, root: isMobile() ? null : document.querySelector('.op2-main') });
 
 document.querySelectorAll('.fade-up').forEach((el, i) => {
   el.style.transitionDelay = `${(i % 4) * 0.07}s`;
@@ -122,7 +126,7 @@ document.querySelectorAll('.fade-up').forEach((el, i) => {
       }
     });
   }, {
-    root: main,
+    root: isMobile() ? null : main,
     threshold: 0.35,
   });
 
