@@ -3,7 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Adens Archive — Portfolio</title>
+  <title>Aden Brady — Systems &amp; Infrastructure Engineer</title>
+  <meta name="description" content="Portfolio of Aden Brady, a systems and infrastructure engineer focused on enterprise IT, virtualization, and cyber defense." />
+
+  <!-- OpenGraph — LinkedIn and general link previews -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://banani.dev/" />
+  <meta property="og:title" content="Aden Brady — Systems &amp; Infrastructure Engineer" />
+  <meta property="og:description" content="Systems and infrastructure engineer focused on enterprise IT, VMware virtualization, and cyber defense. Currently at the City of Orlando." />
+  <meta property="og:image" content="https://banani.dev/images/4U1A1609.jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
   <link rel="icon" type="image/x-icon" href="favicon_io/favicon.ico" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png" />
@@ -52,10 +63,10 @@
 
       <div class="op2-side-section">
         <div class="op2-side-h">Homelab</div>
-        <div class="op2-side-item"><span class="key">→</span><span>nas01.lab</span></div>
-        <div class="op2-side-item"><span class="key">→</span><span>rpi.lab</span></div>
-        <div class="op2-side-item"><span class="key">→</span><span>esxi.ucf</span></div>
-        <div class="op2-side-item"><span class="key">→</span><span>docker host</span></div>
+        <a class="op2-side-item" href="#nas01"><span class="key">→</span><span>nas01.lab</span></a>
+        <a class="op2-side-item" href="#rpi"><span class="key">→</span><span>rpi.lab</span></a>
+        <a class="op2-side-item op2-side-item--decom" href="#esxi"><span class="key">→</span><span>esxi.ucf</span></a>
+        <a class="op2-side-item" href="#docker"><span class="key">→</span><span>docker host</span></a>
       </div>
 
       <div class="op2-side-section">
@@ -299,7 +310,8 @@
       </div>
       <div class="projects-list">
 
-        <a class="project-card fade-up" href="https://github.com/abrady-dev/NAS-Build-2025" target="_blank" rel="noopener noreferrer">
+        <!-- TrueNAS: outer element is a div (not a link) so <details> is valid -->
+        <div class="project-card fade-up">
           <div>
             <div class="project-type">Homelab · NAS / Storage</div>
             <div class="project-name">TrueNAS Home Server</div>
@@ -307,11 +319,27 @@
             <div class="project-tags">
               <span class="tag">TrueNAS</span><span class="tag">ZFS / RAID-Z1</span><span class="tag">Docker</span><span class="tag">VaultWarden</span><span class="tag">Tailscale</span>
             </div>
+            <details class="arch-details" open>
+              <summary class="arch-toggle">./arch --view</summary>
+              <div class="mermaid-wrap">
+                <pre class="mermaid">
+flowchart TD
+    D1[sda] &amp; D2[sdb] &amp; D3[sdc] &amp; D4[sdd] --> POOL[nas-pool / RAID-Z1]
+    POOL --> DS1[(app_configs)]
+    POOL --> DS2[(docker)]
+    POOL --> DS3[(app_mounts)]
+    POOL --> DS4[(truenas_catalog)]
+    DS2 --> VW[VaultWarden]
+    DS2 --> NG[nginx-proxy-mgr]
+    DS2 --> TS[Tailscale]
+                </pre>
+              </div>
+            </details>
           </div>
-          <div class="project-arrow">
+          <a href="https://github.com/abrady-dev/NAS-Build-2025" target="_blank" rel="noopener noreferrer" class="project-arrow">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-          </div>
-        </a>
+          </a>
+        </div>
 
         <div class="project-card fade-up">
           <div>
@@ -321,6 +349,18 @@
             <div class="project-tags">
               <span class="tag">Pi-hole</span><span class="tag">DNS</span><span class="tag">Network Security</span><span class="tag">Linux</span>
             </div>
+            <details class="arch-details" open>
+              <summary class="arch-toggle">./arch --view</summary>
+              <div class="mermaid-wrap">
+                <pre class="mermaid">
+flowchart LR
+    C([clients]) --> PH[Pi-hole / rpi.lab]
+    PH -->|allowed| UP[1.1.1.1 / 8.8.8.8]
+    PH -. blocked .-> BL[(blocklists)]
+    TS([Tailscale]) -. vpn .-> PH
+                </pre>
+              </div>
+            </details>
           </div>
           <div class="project-arrow">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
@@ -349,6 +389,18 @@
             <div class="project-tags">
               <span class="tag">Python 3.12</span><span class="tag">ServiceNow REST API</span><span class="tag">OAuth</span><span class="tag">matplotlib</span><span class="tag">Ubuntu 24</span>
             </div>
+            <details class="arch-details" open>
+              <summary class="arch-toggle">./arch --view</summary>
+              <div class="mermaid-wrap">
+                <pre class="mermaid">
+flowchart LR
+    SN[ServiceNow API] -->|OAuth 2.0| PY[Python 3.12]
+    PY -->|3200 RITMs| EN[enrichment]
+    EN --> JS[(structured JSON)]
+    EN --> CH[matplotlib charts]
+                </pre>
+              </div>
+            </details>
           </div>
           <div class="project-arrow">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
@@ -369,7 +421,116 @@
           </div>
         </div>
 
-      </div>
+      </div><!-- /.projects-list -->
+
+      <!-- Homelab node specs — targets for sidebar anchor links -->
+      <div class="homelab-specs">
+        <div class="homelab-specs-h">Homelab Nodes</div>
+        <div class="specs-grid">
+
+          <div class="specs-card fade-up" id="nas01">
+            <div class="specs-card-h">
+              <span class="specs-hostname">nas01.lab</span>
+              <span class="specs-badge specs-badge--ok">online</span>
+            </div>
+            <div class="specs-body">
+              <div class="specs-row">
+                <span class="specs-key">role</span>
+                <span class="specs-val">NAS / home server</span>
+              </div>
+              <div class="specs-row">
+                <span class="specs-key">os</span>
+                <span class="specs-val">TrueNAS SCALE CE</span>
+              </div>
+              <div class="specs-row">
+                <span class="specs-key">storage</span>
+                <span class="specs-val">4x HDD, RAID-Z1</span>
+              </div>
+              <div class="specs-row">
+                <span class="specs-key">services</span>
+                <span class="specs-val">ZFS, Docker, VaultWarden, nginx-proxy-mgr, Tailscale</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="specs-card fade-up" id="rpi">
+            <div class="specs-card-h">
+              <span class="specs-hostname">rpi.lab</span>
+              <span class="specs-badge specs-badge--ok">online</span>
+            </div>
+            <div class="specs-body">
+              <div class="specs-row">
+                <span class="specs-key">role</span>
+                <span class="specs-val">DNS resolver / network filter</span>
+              </div>
+              <div class="specs-row">
+                <span class="specs-key">os</span>
+                <span class="specs-val">Raspberry Pi OS (Debian)</span>
+              </div>
+              <div class="specs-row">
+                <span class="specs-key">hw</span>
+                <span class="specs-val">Raspberry Pi 4</span>
+              </div>
+              <div class="specs-row">
+                <span class="specs-key">services</span>
+                <span class="specs-val">Pi-hole, Tailscale</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="specs-card specs-card--ended fade-up" id="esxi">
+            <div class="specs-card-h">
+              <span class="specs-hostname">esxi.ucf</span>
+              <span class="specs-badge specs-badge--ended">access ended</span>
+            </div>
+            <div class="specs-body">
+              <div class="specs-row">
+                <span class="specs-key">role</span>
+                <span class="specs-val">VMware ESXi hypervisor</span>
+              </div>
+              <div class="specs-row">
+                <span class="specs-key">os</span>
+                <span class="specs-val">VMware ESXi 8</span>
+              </div>
+              <div class="specs-row">
+                <span class="specs-key">context</span>
+                <span class="specs-val">UCF IT dev/test environment</span>
+              </div>
+              <div class="specs-row">
+                <span class="specs-key">services</span>
+                <span class="specs-val">Windows Server, Linux, Active Directory, vCenter</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="specs-card fade-up" id="docker">
+            <div class="specs-card-h">
+              <span class="specs-hostname">docker host</span>
+              <span class="specs-badge specs-badge--ok">online</span>
+            </div>
+            <div class="specs-body">
+              <div class="specs-row">
+                <span class="specs-key">role</span>
+                <span class="specs-val">container runtime</span>
+              </div>
+              <div class="specs-row">
+                <span class="specs-key">os</span>
+                <span class="specs-val">Docker CE (on TrueNAS SCALE)</span>
+              </div>
+              <div class="specs-row">
+                <span class="specs-key">host</span>
+                <span class="specs-val">nas01.lab</span>
+              </div>
+              <div class="specs-row">
+                <span class="specs-key">services</span>
+                <span class="specs-val">VaultWarden, nginx-proxy-mgr, Tailscale, Watchtower</span>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /.specs-grid -->
+      </div><!-- /.homelab-specs -->
+
     </div>
 
     <div class="op2-panel" id="experience">
@@ -470,6 +631,14 @@
       </div>
     </div>
 
+    <footer class="site-footer fade-up">
+      <span>Last updated: May 2026</span>
+      <span class="footer-sep">·</span>
+      <span>Built with HTML, CSS, JS</span>
+      <span class="footer-sep">·</span>
+      <span>Deployed on Vercel</span>
+    </footer>
+
   </main><!-- /.op2-main -->
 
   <!-- RIGHT RAIL (column 3) -->
@@ -552,5 +721,7 @@
 
 <script src="bg-animation.js"></script>
 <script src="main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script src="mermaid-init.js"></script>
 </body>
 </html>
