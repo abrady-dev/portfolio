@@ -887,7 +887,7 @@ footer { border-top: 1px solid var(--border); padding: 1.5rem 2rem; text-align: 
 }
 .op2-prj {
   display: grid;
-  grid-template-columns: 60px 1fr 200px 90px 60px;
+  grid-template-columns: 60px 1fr 200px 90px 60px 20px;
   gap: 16px;
   padding: 14px 18px;
   align-items: center;
@@ -897,6 +897,13 @@ footer { border-top: 1px solid var(--border); padding: 1.5rem 2rem; text-align: 
   text-decoration: none;
   color: inherit;
 }
+.op2-prj-gh {
+  display: flex;
+  align-items: center;
+  color: var(--ink-faint);
+  transition: color 0.15s;
+}
+.op2-prj-gh:hover { color: var(--accent); }
 .op2-prj:last-child { border-bottom: none; }
 .op2-prj:hover { background: var(--bg); }
 .op2-prj:hover .op2-prj-name { color: var(--accent); }
@@ -1294,7 +1301,8 @@ footer { border-top: 1px solid var(--border); padding: 1.5rem 2rem; text-align: 
   }
   .op2-prj-id,
   .op2-prj-scope,
-  .op2-prj-lang {
+  .op2-prj-lang,
+  .op2-prj-gh {
     display: none;
   }
   .op2-prj-name {
