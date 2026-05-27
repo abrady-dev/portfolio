@@ -40,12 +40,11 @@ const html = `<!DOCTYPE html>
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
 
-  <link rel="icon" type="image/svg+xml" href="favicon_io/favicon.svg" />
-  <link rel="icon" type="image/x-icon" href="favicon_io/favicon.ico" />
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png" />
-  <link rel="manifest" href="favicon_io/site.webmanifest" />
+  <link rel="icon" type="image/png" sizes="96x96" href="favicon_io%202/favicon-96x96.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon_io%202/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon_io%202/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon_io%202/apple-touch-icon.png" />
+  <link rel="manifest" href="favicon_io%202/site.webmanifest" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
