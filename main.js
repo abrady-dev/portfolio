@@ -7,7 +7,7 @@ const root = document.documentElement;
 const stored = localStorage.getItem('theme');
 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-if (stored === 'dark' || (!stored && prefersDark)) {
+if (stored !== 'light') {
   root.setAttribute('data-theme', 'dark');
 }
 
