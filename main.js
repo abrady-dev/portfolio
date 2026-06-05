@@ -112,6 +112,8 @@ document.querySelectorAll('.fade-up').forEach((el, i) => {
 (function () {
   const ORDER = ['hero', 'about', 'skills', 'projects', 'experience', 'contact'];
   const main = document.querySelector('.op2-main');
+  const visible = new Set();
+  let clickLock = false;
 
   function setActive(id) {
     document.querySelectorAll('.op2-side-item[href]').forEach(link => {
@@ -119,15 +121,43 @@ document.querySelectorAll('.fade-up').forEach((el, i) => {
     });
   }
 
+  // Always highlight the topmost visible section in ORDER, not whichever fired last
+  function updateActive() {
+    if (clickLock) {
+      return;
+    }
+    const active = ORDER.find(id => visible.has(id));
+    if (active) {
+      setActive(active);
+    }
+  }
+
   const sectionObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        setActive(e.target.id);
+        visible.add(e.target.id);
+      }
+      else {
+        visible.delete(e.target.id);
       }
     });
+    updateActive();
   }, {
     root: isMobile() ? null : main,
     threshold: 0.35,
+  });
+
+  // On click, immediately set active and lock the observer for the scroll duration
+  document.querySelectorAll('.op2-side-item[href]').forEach(link => {
+    link.addEventListener('click', () => {
+      const href = link.getAttribute('href');
+      if (!href.startsWith('#')) {
+        return;
+      }
+      setActive(href.slice(1));
+      clickLock = true;
+      setTimeout(() => { clickLock = false; }, 900);
+    });
   });
 
   ORDER.forEach(id => {
