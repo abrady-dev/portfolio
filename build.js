@@ -55,6 +55,7 @@ const html = `<!DOCTYPE html>
 
 ${body}
 
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 <script src="bg-animation.js"></script>
 <script src="main.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>

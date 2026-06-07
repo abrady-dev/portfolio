@@ -254,3 +254,32 @@ setInterval(updateClock, 30000);
 
   connect();
 })();
+
+// 3D tilt on hover — project cards and experience items track the cursor in perspective
+(function () {
+  document.querySelectorAll('.project-card, .exp-item, .op2-stat').forEach(card => {
+    let leaveTimer = null;
+
+    card.addEventListener('mousemove', e => {
+      clearTimeout(leaveTimer);
+      leaveTimer = null;
+      card.style.transition = '';
+      const { left, top, width, height } = card.getBoundingClientRect();
+      const x = ((e.clientX - left) / width  - 0.5) * 2;
+      const y = ((e.clientY - top)  / height - 0.5) * 2;
+      const deg = card.classList.contains('op2-stat') ? 5 : 7;
+      card.style.transform = `perspective(700px) rotateY(${x * deg}deg) rotateX(${-y * deg}deg) translateZ(5px)`;
+      card.style.boxShadow = `${-x * 10}px ${y * 10}px 24px rgba(59,130,246,0.12)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transition = 'transform 0.5s cubic-bezier(0.22,0.61,0.36,1), box-shadow 0.5s ease';
+      card.style.transform  = '';
+      card.style.boxShadow  = '';
+      leaveTimer = setTimeout(() => {
+        card.style.transition = '';
+        leaveTimer = null;
+      }, 500);
+    });
+  });
+})();

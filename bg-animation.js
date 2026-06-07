@@ -1,164 +1,169 @@
-const BLOB_DEFS = [
-    { fx: 0.15, fy: 0.20, r: 320, rgb: [59,  130, 246], a: 0.22, vx:  0.38, vy:  0.28 },
-    { fx: 0.85, fy: 0.80, r: 290, rgb: [167, 139, 250], a: 0.20, vx: -0.32, vy: -0.38 },
-    { fx: 0.80, fy: 0.18, r: 250, rgb: [56,  189, 248], a: 0.15, vx: -0.26, vy:  0.32 },
-    { fx: 0.18, fy: 0.78, r: 270, rgb: [99,  102, 241], a: 0.17, vx:  0.28, vy: -0.26 },
-]
+/**
+ * Three.js 3D background scene: perspective grid, floating nodes, particle field.
+ * Mouse movement parallaxes the camera for a depth effect. Only renders in dark mode.
+ */
+(function () {
+  const canvas = document.getElementById('bg-canvas');
+  if (!canvas || typeof THREE === 'undefined') {
+    return;
+  }
 
-const GAP        = 36
-const DOT_R      = 0.9
-const LINE_ALPHA = 0.028
-const DOT_ALPHA  = 0.07
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x0d0f14, 0.038);
 
-class Pulse {
-    constructor(w, h) {
-        this.horiz = Math.random() > 0.5
-        this.speed = 0.9 + Math.random() * 1.4
-        this.alpha = 0.18 + Math.random() * 0.18
-        this.len   = 55 + Math.random() * 70
-        if (this.horiz) {
-            this.axis = Math.round(Math.random() * Math.ceil(h / GAP)) * GAP + GAP / 2
-            this.pos  = -this.len
-            this.end  = w + this.len
-        } else {
-            this.axis = Math.round(Math.random() * Math.ceil(w / GAP)) * GAP + GAP / 2
-            this.pos  = -this.len
-            this.end  = h + this.len
-        }
+  const camera = new THREE.PerspectiveCamera(58, innerWidth / innerHeight, 0.1, 80);
+  camera.position.set(0, 2.5, 9);
+  camera.lookAt(0, 0, 0);
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setSize(innerWidth, innerHeight);
+
+  // Perspective grid floor — recedes to the horizon
+  const grid1 = new THREE.GridHelper(80, 60, 0x1a3a6c, 0x0e1f38);
+  grid1.position.y = -2;
+  scene.add(grid1);
+
+  const grid2 = new THREE.GridHelper(80, 20, 0x0e2040, 0x091828);
+  grid2.position.y = -2.05;
+  scene.add(grid2);
+
+  // Floating particle field
+  const PART_COUNT = 700;
+  const pPos = new Float32Array(PART_COUNT * 3);
+  for (let i = 0; i < PART_COUNT; i++) {
+    pPos[i * 3]     = (Math.random() - 0.5) * 44;
+    pPos[i * 3 + 1] = (Math.random() - 0.5) * 20;
+    pPos[i * 3 + 2] = (Math.random() - 0.5) * 32;
+  }
+  const pGeom = new THREE.BufferGeometry();
+  pGeom.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+  const pMat = new THREE.PointsMaterial({
+    color: 0x3b82f6, size: 0.055, transparent: true, opacity: 0.50, sizeAttenuation: true,
+  });
+  const particleSystem = new THREE.Points(pGeom, pMat);
+  scene.add(particleSystem);
+
+  // Wireframe icosahedra nodes
+  const NODE_DEFS = [
+    { pos: [-4.5,  0.4, -2.0], color: 0x3b82f6, size: 0.28, rx:  0.011, ry:  0.016 },
+    { pos: [ 3.8, -0.6, -1.5], color: 0x6366f1, size: 0.22, rx: -0.009, ry:  0.013 },
+    { pos: [-1.2,  1.4, -4.5], color: 0x8b5cf6, size: 0.32, rx:  0.014, ry: -0.011 },
+    { pos: [ 5.2,  0.8, -6.0], color: 0x60a5fa, size: 0.20, rx: -0.012, ry:  0.019 },
+    { pos: [-5.2, -0.8, -5.5], color: 0x4f46e5, size: 0.26, rx:  0.010, ry: -0.015 },
+    { pos: [ 1.2, -1.2, -2.5], color: 0x7c3aed, size: 0.18, rx: -0.016, ry:  0.012 },
+    { pos: [-3.0,  1.8, -8.0], color: 0x3b82f6, size: 0.35, rx:  0.008, ry:  0.014 },
+    { pos: [ 4.0, -1.8, -8.5], color: 0x6366f1, size: 0.24, rx:  0.013, ry: -0.010 },
+    { pos: [ 0.5,  0.8, -3.5], color: 0x8b5cf6, size: 0.21, rx: -0.011, ry:  0.017 },
+    { pos: [-2.5, -1.5, -1.2], color: 0x60a5fa, size: 0.19, rx:  0.015, ry: -0.013 },
+  ];
+
+  const nodes = NODE_DEFS.map(def => {
+    const mesh = new THREE.Mesh(
+      new THREE.IcosahedronGeometry(def.size, 0),
+      new THREE.MeshBasicMaterial({ color: def.color, wireframe: true, transparent: true, opacity: 0.40 })
+    );
+    mesh.position.set(...def.pos);
+    mesh.userData.rx = def.rx;
+    mesh.userData.ry = def.ry;
+    scene.add(mesh);
+    return mesh;
+  });
+
+  // Connection lines between nearby nodes
+  const lineMat = new THREE.LineBasicMaterial({ color: 0x2a4a8c, transparent: true, opacity: 0.22 });
+  const LINK_DIST = 4.8;
+  for (let i = 0; i < NODE_DEFS.length; i++) {
+    for (let j = i + 1; j < NODE_DEFS.length; j++) {
+      const a = new THREE.Vector3(...NODE_DEFS[i].pos);
+      const b = new THREE.Vector3(...NODE_DEFS[j].pos);
+      if (a.distanceTo(b) < LINK_DIST) {
+        scene.add(new THREE.Line(
+          new THREE.BufferGeometry().setFromPoints([a, b]),
+          lineMat
+        ));
+      }
+    }
+  }
+
+  // Soft ambient glow blobs
+  [
+    { pos: [-4,  2,  -3], color: 0x1d4ed8, opacity: 0.07, r: 5 },
+    { pos: [ 5, -1,  -6], color: 0x4c1d95, opacity: 0.05, r: 6 },
+    { pos: [ 0,  4, -12], color: 0x1e3a8a, opacity: 0.04, r: 8 },
+  ].forEach(b => {
+    const m = new THREE.Mesh(
+      new THREE.SphereGeometry(b.r, 10, 10),
+      new THREE.MeshBasicMaterial({ color: b.color, transparent: true, opacity: b.opacity })
+    );
+    m.position.set(...b.pos);
+    scene.add(m);
+  });
+
+  // Mouse parallax
+  let mx = 0, my = 0;
+  document.addEventListener('mousemove', e => {
+    mx = (e.clientX / innerWidth  - 0.5) * 2;
+    my = (e.clientY / innerHeight - 0.5) * 2;
+  }, { passive: true });
+
+  // Scroll depth — push camera forward as user scrolls down
+  let scrollProgress = 0;
+  const mainEl = document.querySelector('.op2-main');
+  function onScroll() {
+    const el = mainEl || document.documentElement;
+    const max = (el.scrollHeight || document.body.scrollHeight) - innerHeight;
+    scrollProgress = Math.min((el.scrollTop || window.scrollY) / Math.max(max, 1), 1);
+  }
+  if (mainEl) {
+    mainEl.addEventListener('scroll', onScroll, { passive: true });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  function isDark() {
+    return document.documentElement.getAttribute('data-theme') !== 'light';
+  }
+
+  let lastTs = null;
+  let raf = null;
+
+  function animate(ts) {
+    raf = requestAnimationFrame(animate);
+
+    // Skip rendering in light mode to save GPU
+    if (!isDark()) {
+      lastTs = null;
+      return;
     }
 
-    done() { return this.pos > this.end }
-    tick(dt = 1) { this.pos += this.speed * dt }
+    const dt = lastTs === null ? 1 : Math.min((ts - lastTs) / 16.67, 3);
+    lastTs = ts;
 
-    draw(ctx) {
-        const head = this.pos
-        const tail = this.pos - this.len
-        let grad
-        if (this.horiz) {
-            grad = ctx.createLinearGradient(tail, this.axis, head, this.axis)
-        } else {
-            grad = ctx.createLinearGradient(this.axis, tail, this.axis, head)
-        }
-        grad.addColorStop(0,    `rgba(96,165,250,0)`)
-        grad.addColorStop(0.55, `rgba(96,165,250,${this.alpha})`)
-        grad.addColorStop(0.85, `rgba(180,210,255,${this.alpha * 0.7})`)
-        grad.addColorStop(1,    `rgba(220,235,255,${this.alpha * 0.3})`)
+    nodes.forEach(n => {
+      n.rotation.x += n.userData.rx * dt;
+      n.rotation.y += n.userData.ry * dt;
+    });
 
-        ctx.save()
-        ctx.strokeStyle = grad
-        ctx.lineWidth   = 1.2
-        ctx.shadowColor = `rgba(96,165,250,${this.alpha * 0.5})`
-        ctx.shadowBlur  = 4
-        ctx.beginPath()
-        if (this.horiz) {
-            ctx.moveTo(tail, this.axis)
-            ctx.lineTo(head, this.axis)
-        } else {
-            ctx.moveTo(this.axis, tail)
-            ctx.lineTo(this.axis, head)
-        }
-        ctx.stroke()
-        ctx.restore()
-    }
-}
+    particleSystem.rotation.y += 0.00015 * dt;
 
-const canvas = document.getElementById('bg-canvas')
-const ctx    = canvas.getContext('2d')
+    // Camera parallax — gently follows the mouse with lerp
+    camera.position.x += (mx * 1.6 - camera.position.x) * 0.022;
+    camera.position.y += (-my * 0.8 + 2.5 - camera.position.y) * 0.022;
+    camera.position.z  = 9 - scrollProgress * 3;
+    camera.lookAt(mx * 0.25, my * -0.15, 0);
 
-const gridOff = document.createElement('canvas')
-const gCtx    = gridOff.getContext('2d')
+    renderer.render(scene, camera);
+  }
 
-const blobs = BLOB_DEFS.map(b => ({
-    ...b,
-    cx: b.fx * window.innerWidth,
-    cy: b.fy * window.innerHeight,
-}))
+  raf = requestAnimationFrame(animate);
 
-const pulses  = []
-let lastSpawn = 0
+  document.addEventListener('visibilitychange', () => {
+    lastTs = null;
+  });
 
-function buildGrid(w, h) {
-    gridOff.width  = w
-    gridOff.height = h
-    gCtx.clearRect(0, 0, w, h)
-
-    gCtx.strokeStyle = `rgba(96,165,250,${LINE_ALPHA})`
-    gCtx.lineWidth   = 1
-    for (let x = GAP / 2; x <= w; x += GAP) {
-        gCtx.beginPath(); gCtx.moveTo(x, 0); gCtx.lineTo(x, h); gCtx.stroke()
-    }
-    for (let y = GAP / 2; y <= h; y += GAP) {
-        gCtx.beginPath(); gCtx.moveTo(0, y); gCtx.lineTo(w, y); gCtx.stroke()
-    }
-
-    gCtx.fillStyle = `rgba(96,165,250,${DOT_ALPHA})`
-    for (let x = GAP / 2; x <= w; x += GAP) {
-        for (let y = GAP / 2; y <= h; y += GAP) {
-            gCtx.beginPath()
-            gCtx.arc(x, y, DOT_R, 0, Math.PI * 2)
-            gCtx.fill()
-        }
-    }
-}
-
-function resize() {
-    const w = window.innerWidth
-    const h = window.innerHeight
-    canvas.width  = w
-    canvas.height = h
-    buildGrid(w, h)
-}
-
-let lastFrameTs = null
-
-function frame(ts) {
-    if (lastFrameTs === null) lastFrameTs = ts
-    const dt = Math.min(ts - lastFrameTs, 50) / 16.67
-    lastFrameTs = ts
-
-    const { width: w, height: h } = canvas
-    ctx.clearRect(0, 0, w, h)
-
-    ctx.drawImage(gridOff, 0, 0)
-
-    if (ts - lastSpawn > 2200) {
-        const count = Math.random() > 0.45 ? 2 : 1
-        for (let i = 0; i < count; i++) pulses.push(new Pulse(w, h))
-        lastSpawn = ts
-    }
-
-    for (let i = pulses.length - 1; i >= 0; i--) {
-        pulses[i].draw(ctx)
-        pulses[i].tick(dt)
-        if (pulses[i].done()) pulses.splice(i, 1)
-    }
-
-    for (const b of blobs) {
-        b.cx += b.vx * dt
-        b.cy += b.vy * dt
-        const pad = b.r * 0.5
-        if (b.cx < -pad || b.cx > w + pad) b.vx *= -1
-        if (b.cy < -pad || b.cy > h + pad) b.vy *= -1
-
-        const grad = ctx.createRadialGradient(b.cx, b.cy, 0, b.cx, b.cy, b.r)
-        grad.addColorStop(0, `rgba(${b.rgb},${b.a})`)
-        grad.addColorStop(1, `rgba(${b.rgb},0)`)
-        ctx.fillStyle = grad
-        ctx.beginPath()
-        ctx.arc(b.cx, b.cy, b.r, 0, Math.PI * 2)
-        ctx.fill()
-    }
-
-    requestAnimationFrame(frame)
-}
-
-document.addEventListener('visibilitychange', () => {
-    if (!document.hidden) {
-        lastFrameTs = null
-        lastSpawn = performance.now()
-    }
-})
-
-window.addEventListener('resize', resize)
-resize()
-requestAnimationFrame(frame)
+  window.addEventListener('resize', () => {
+    camera.aspect = innerWidth / innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth, innerHeight);
+  });
+})();
