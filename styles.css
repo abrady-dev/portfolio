@@ -803,7 +803,7 @@ footer { border-top: 1px solid var(--border); padding: 1.5rem 2rem; text-align: 
 /* --- STATS ROW --------------------------------------------- */
 .op2-stats {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   border-bottom: 1px solid var(--line);
   background: var(--surface);
 }
