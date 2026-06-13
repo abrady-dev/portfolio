@@ -1,1 +1,8 @@
 .claude/
+
+# macOS
+.DS_Store
+
+# Python bytecode (e.g. Claude skill scripts)
+__pycache__/
+*.py[cod]

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://banani.dev/sitemap.xml

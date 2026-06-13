@@ -1,0 +1,84 @@
+    <section class="doc-section" id="homelab" aria-labelledby="homelab-h">
+      <header class="sec-head">
+        <span class="sec-num" aria-hidden="true">04</span>
+        <h2 id="homelab-h">Homelab</h2>
+        <span class="sec-meta">node reference</span>
+      </header>
+
+      <p class="lab-intro fade-up">Reference sheet for the personal lab behind the projects above. Services run as Docker containers and are monitored with Uptime Kuma; remote access goes over Tailscale with no ports exposed to the public internet.</p>
+
+      <div class="lab-services fade-up">
+        <span class="lab-svc">pihole</span>
+        <span class="lab-svc">portainer</span>
+        <span class="lab-svc">speedtest-tracker</span>
+        <span class="lab-svc">tailscale</span>
+        <span class="lab-svc">uptime-kuma</span>
+        <span class="lab-svc">vaultwarden</span>
+        <span class="lab-svc lab-svc--decom">vsphere-lab</span>
+        <span class="lab-services-note">snapshot as of {{BUILD_DATE}}, not live telemetry</span>
+      </div>
+
+      <div class="specs-grid">
+
+        <div class="spec-card fade-up" id="nas01">
+          <div class="spec-card-h">
+            <span class="spec-hostname">nas01.lab</span>
+            <span class="chip chip--ok">online</span>
+          </div>
+          <table class="spec-table">
+            <tbody>
+              <tr><th scope="row">role</th><td>NAS / home server</td></tr>
+              <tr><th scope="row">os</th><td>TrueNAS SCALE CE</td></tr>
+              <tr><th scope="row">storage</th><td>4x HDD, RAID-Z1</td></tr>
+              <tr><th scope="row">services</th><td>ZFS, Docker, VaultWarden, nginx-proxy-mgr, Tailscale</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="spec-card fade-up" id="rpi">
+          <div class="spec-card-h">
+            <span class="spec-hostname">rpi.lab</span>
+            <span class="chip chip--ok">online</span>
+          </div>
+          <table class="spec-table">
+            <tbody>
+              <tr><th scope="row">role</th><td>DNS resolver / network filter</td></tr>
+              <tr><th scope="row">os</th><td>Raspberry Pi OS (Debian)</td></tr>
+              <tr><th scope="row">hw</th><td>Raspberry Pi 4</td></tr>
+              <tr><th scope="row">services</th><td>Pi-hole, Tailscale</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="spec-card spec-card--ended fade-up" id="esxi">
+          <div class="spec-card-h">
+            <span class="spec-hostname">esxi.ucf</span>
+            <span class="chip chip--ended">access ended</span>
+          </div>
+          <table class="spec-table">
+            <tbody>
+              <tr><th scope="row">role</th><td>VMware ESXi hypervisor</td></tr>
+              <tr><th scope="row">os</th><td>VMware ESXi 8</td></tr>
+              <tr><th scope="row">context</th><td>UCF IT dev/test environment</td></tr>
+              <tr><th scope="row">services</th><td>Windows Server, Linux, Active Directory, vCenter</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="spec-card fade-up" id="docker">
+          <div class="spec-card-h">
+            <span class="spec-hostname">docker host</span>
+            <span class="chip chip--ok">online</span>
+          </div>
+          <table class="spec-table">
+            <tbody>
+              <tr><th scope="row">role</th><td>container runtime</td></tr>
+              <tr><th scope="row">os</th><td>Docker CE (on TrueNAS SCALE)</td></tr>
+              <tr><th scope="row">host</th><td>nas01.lab</td></tr>
+              <tr><th scope="row">services</th><td>VaultWarden, nginx-proxy-mgr, Tailscale, Watchtower</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>

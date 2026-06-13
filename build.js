@@ -28,17 +28,43 @@ const html = `<!DOCTYPE html>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aden Brady — Systems &amp; Infrastructure Engineer</title>
-  <meta name="description" content="Portfolio of Aden Brady, a systems and infrastructure engineer focused on enterprise IT, virtualization, and cyber defense." />
+  <title>Aden Brady — IT &amp; Infrastructure Portfolio</title>
+  <meta name="description" content="Aden Brady is a Computer Systems Support Analyst at the City of Orlando focused on IT infrastructure, systems administration, and homelab projects." />
+  <link rel="canonical" href="${SITE_URL}/" />
 
   <!-- OpenGraph — LinkedIn and general link previews -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="${SITE_URL}/" />
-  <meta property="og:title" content="Aden Brady — Systems &amp; Infrastructure Engineer" />
-  <meta property="og:description" content="Systems and infrastructure engineer focused on enterprise IT, VMware virtualization, and cyber defense. Currently at the City of Orlando." />
+  <meta property="og:title" content="Aden Brady — IT &amp; Infrastructure Portfolio" />
+  <meta property="og:description" content="Aden Brady is a Computer Systems Support Analyst at the City of Orlando focused on IT infrastructure, systems administration, and homelab projects." />
   <meta property="og:image" content="${SITE_URL}/images/4U1A1609.jpeg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
+
+  <!-- Twitter card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Aden Brady — IT &amp; Infrastructure Portfolio" />
+  <meta name="twitter:description" content="Aden Brady is a Computer Systems Support Analyst at the City of Orlando focused on IT infrastructure, systems administration, and homelab projects." />
+  <meta name="twitter:image" content="${SITE_URL}/images/4U1A1609.jpeg" />
+
+  <!-- Person structured data for search engines -->
+  <!-- TODO: add your LinkedIn profile URL to the sameAs array below -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Aden Brady",
+    "jobTitle": "Computer Systems Support Analyst",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "City of Orlando"
+    },
+    "url": "${SITE_URL}",
+    "sameAs": [
+      "https://github.com/abrady-dev"
+    ]
+  }
+  </script>
 
   <link rel="icon" type="image/png" sizes="96x96" href="favicon_io%202/favicon-96x96.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon_io%202/favicon-32x32.png" />
