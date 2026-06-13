@@ -255,9 +255,9 @@ setInterval(updateClock, 30000);
   connect();
 })();
 
-// 3D tilt on hover — project cards and experience items track the cursor in perspective
+// 3D tilt on hover — stat tiles track the cursor in perspective
 (function () {
-  document.querySelectorAll('.project-card, .exp-item, .op2-stat').forEach(card => {
+  document.querySelectorAll('.op2-stat').forEach(card => {
     let leaveTimer = null;
 
     card.addEventListener('mousemove', e => {
